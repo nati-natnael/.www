@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<Title>My Calendar</Title>
+		<link rel="stylesheet" type="text/css" href="styles/common_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/cal_style.css">
+		<script type="text/javascript" src="scripts/cal.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7RIsZSEBIlrc85IpIs8aeeb-EMyHh2YY&libraries=places">
+		</script>
+	</head>
+	<body>
+		<div id="main_wrapper">
+			<!-- navigation -->
+			<nav id="main_nav">
+				<a href="#"><div id="nav_cal_id">MyCalendar</div></a>
+				<a href="form.html"><div id="nav_form_id">Form Input</div></a>
+			</nav>
+			
+			<div id="content_wrapper">				
+				<!-- Page Content -->
+				<div id="main_content">
+					<!-- Heading -->
+					<!-- <h2 id="heading">My Calendar</h2> -->
+
+					<!-- Right Content -->
+					<div id="top_content">
+						<div id="pp_event_id">
+							<input id="pause_play_id" type="image" src="imgs/pause_play.png" onclick="pausePlay()" alt="true">
+							<div id="event_scroll"></div>
+						</div>
+					</div>
+
+					<div id="table_wrapper">
+						<!-- Calendar Table -->
+						<div id="ct_div">
+							<table>
+
+								<thead>
+									<tr>
+										<th>Monday</th>
+										<th>Tuesday</th>
+										<th>Wednesday</th>
+										<th>Thursday</th>
+										<th>Friday</th>
+										<th class="weekend">Saturday</th>
+										<th class="weekend">Sunday</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<!-- Row 1 -->
+									<tr>
+										<td class="mon_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn_logo">
+											</div>
+										</td>
+
+										<td class="tues_td">
+											<div class="cell_content" 
+												 data-value="Mechanical_Engineering.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												CSCI 5204 <br> 
+												<span class="location">
+													<a target="_blank" href="http://campusmaps.umn.edu/mechanical-engineering">
+														Mechanical Engineering Building UMN
+													</a>
+												</span> <br>
+												<span>9:45 - 11:00 AM</span>
+												<img class="table_img" src="imgs/Mechanical_Engineering.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="wed_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="thur_td">
+											<div class="cell_content" 
+												 data-value="Mechanical_Engineering.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												CSCI 5204 <br> 
+												<span class="location">
+													<a target="_blank" href="http://campusmaps.umn.edu/mechanical-engineering">
+														Mechanical Engineering Building UMN
+													</a>
+												</span> <br>
+												<span>9:45 - 11:00 AM</span>
+												<img class="table_img" src="imgs/Mechanical_Engineering.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="fri_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<!-- <td class="sat_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="sun_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td> -->
+									</tr>
+
+									<!-- Row 2 -->
+									<tr>
+										<td class="mon_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="tues_td">
+											<div class="cell_content" 
+												 data-value="Anderson_Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												HIST 1011W <br> 
+												<span class="location">
+													<a>
+														Anderson Hall
+													</a>
+												</span> <br>
+												<span>11:15 AM - 12:30 AM</span>
+												<img class="table_img" src="imgs/Anderson_Hall.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="wed_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="thur_td">
+											<div class="cell_content" 
+												 data-value="Anderson_Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												HIST 1011W <br> 
+												<span class="location">
+													<a>
+														Anderson Hall
+													</a>
+												</span> <br>
+												<span>11:15 AM - 12:30 PM</span>
+												<img class="table_img" src="imgs/Anderson_Hall.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="fri_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<!-- <td class="sat_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+										<td class="sun_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td> -->
+									</tr>
+
+									<!-- Row 3 -->
+									<tr>
+										<td class="mon_td">
+											<div class="cell_content" 
+												 data-value="Fraser_Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												CSCI 4131 <br> 
+												<span class="location">
+													<a>
+														Fraser Hall
+													</a>
+												</span> <br>
+												<span>1:00 - 2:15 PM</span>
+												<img class="table_img" src="imgs/Fraser_Hall.jpg" alt="Fraser_Hall">
+											</div>
+										</td>
+
+										<td class="tues_td">
+											<div class="cell_content" 
+												 data-value="Blegen Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												HIST 1011W [Discussion] <br> 
+												<span class="location">
+													<a>
+														Blegan Hall
+													</a>
+												</span> <br>
+												<span>1:25 - 2:15 PM</span>
+												<img class="table_img" src="imgs/Blegan_Hall.jpg" alt="Blegan_Hall">
+											</div>
+										</td>
+
+										<td class="wed_td">
+											<div class="cell_content" 
+												 data-value="Fraser_Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												CSCI 4131 <br> 
+												<span class="location">
+													<a>
+														Fraser Hall
+													</a>
+												</span> <br>
+												<span>1:00 - 2:15 PM</span>
+												<img class="table_img" src="imgs/Fraser_Hall.jpg" alt="Fraser_Hall">
+											</div>
+										</td>
+
+										<td class="thur_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="fri_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<!-- <td class="sat_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="sun_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td> -->
+									</tr>
+
+									<!-- Row 4 -->
+									<tr>
+										<td class="mon_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="tues_td">
+											<div class="cell_content" 
+												 data-value="Ford_Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												MATH 5248 <br> 
+												<span class="location">
+													<a>
+														Ford Hall UMN
+													</a>
+												</span> <br>
+												<span>2:30 - 3:45 PM</span>
+												<img class="table_img" src="imgs/Ford_Hall_UMN.jpg" alt="Ford_Hall_UMN">
+											</div>
+										</td>
+
+										<td class="wed_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="thur_td">
+											<div class="cell_content" 
+												 data-value="Ford_Hall.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												MATH 5248 <br> 
+												<span class="location">
+													<a>
+														Ford Hall UMN
+													</a>
+												</span> <br>
+												<span>2:30 - 3:45 PM</span>
+												<img class="table_img" src="imgs/Ford_Hall_UMN.jpg" alt="Ford_Hall_UMN">
+											</div>
+										</td>
+
+										<td class="fri_td">
+											<div class="cell_content" 
+												 data-value="umn_logo.jpg" 
+												 onmouseover="moShowImage(event)"
+												 onmouseout="mtShowImage(event)">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<!-- <td class="sat_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td>
+
+										<td class="sun_td weekend">
+											<div class="cell_content" data-value="umn_logo.jpg">
+												No Event <br>
+												<span class="location"></span> <br>
+												<span></span>
+												<img class="table_img" src="imgs/umn_logo.jpg" alt="umn logo">
+											</div>
+										</td> -->
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Map -->
+					<div id="map_wrapper">
+						<div id="map_form">
+							<form>
+								<!-- Search Radius -->
+								<div class="map_input" id="radius">
+									<!-- <label>Radius: </label> -->
+									<input id="radius_val" 
+										   type="number" 
+										   name="radius"
+										   placeholder="Radius">
+									<input type="button" 
+									       name="findRestaurants" 
+									       value="Find Nearby Restaurants"
+									       onclick="searchRestaurants()">
+								</div>
+								<!-- Destinations -->
+								<div class="map_input" id="destination">
+									<!-- <label>Direction: </label> -->
+									<input id="address" 
+										   type="text" 
+										   name="address"
+										   placeholder="Type address here">
+									<input type="button" 
+										   name="address_button" 
+										   value="Get Direction" 
+										   onclick="onClickSearchDirection()">
+								</div>
+								<!-- Travel Method -->
+								<div class="map_input" id="trav_mode">
+									<div class="map_radio_input">
+										<input class="trav_mode" 
+											   type="radio" 
+											   name="trav_mode" 
+											   value="DRIVING" 
+											   onclick="onClickSearchDirection()"
+											   checked>
+										<span>Driving</span> 
+									</div>
+
+									<div class="map_radio_input">
+										<input class="trav_mode" 
+											   type="radio" 
+											   name="trav_mode" 
+											   value="WALKING"
+											   onclick="onClickSearchDirection()">
+										<span>Walking</span>
+									</div>
+
+									<div class="map_radio_input">
+										<input class="trav_mode" 
+											   type="radio" 
+											   name="trav_mode" 
+											   value="TRANSIT"
+											   onclick="onClickSearchDirection()">
+										<span>Transit</span> 
+									</div>
+
+									<div class="map_radio_input">
+										<input class="trav_mode" 
+											   type="radio" 
+											   name="trav_mode" 
+											   value="BICYCLING"
+											   onclick="onClickSearchDirection()">
+										<span>Bicycling</span> 
+									</div>
+								</div>
+							</form>
+						</div>
+												
+						<div id="map_win">
+							<div id="map_inner_win">
+								<div id="map">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Info Image -->
+					<!-- <div id="img_wrapper">
+						<div id="img_win">
+							<img id="image" src="imgs/umn_logo.jpg" alt="">
+						</div>
+					</div> -->
+				</div>
+
+				<!-- Side Content -->
+				<div id="side_content">
+					<div id="twitter_wrapper">
+						<div id="twitter_win">
+				            <a class="twitter-timeline" href="https://twitter.com/hashtag/UMN" data-widget-id="917013386151583744">
+				            </a>
+				        </div>
+					</div>
+
+					<div id="path_inst_wrapper">
+						<input type="button" name="close" value="X" onclick="hideInstructions()">
+						<div id="path_inst_win">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

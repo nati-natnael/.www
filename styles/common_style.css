@@ -1,0 +1,102 @@
+body {
+	text-align: center;
+	background: #efefef;
+	font-family: Verdana,sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+nav {
+	background: #0b65b1;
+	text-align: left;
+}
+
+input {
+	border: none;
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+input[type=button] {
+	background: #0b65b1;
+	color: white;
+	box-shadow: 1px 1px 5px black;
+	cursor: pointer;
+}
+
+input[type=button]:active {
+	box-shadow: 1px 1px 2px white,
+				inset 1px 1px 2px black;
+}
+
+select {
+	border: none;
+	padding: 2px 10px;
+	border-radius: 4px;
+}
+
+table {
+	font-size: 0.8em;
+	margin: auto;
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+th, tr, td {
+	border: 1px solid gray;
+	border-collapse: collapse;
+}
+
+th {
+	background: #0b65b1;
+	color: white;
+	padding: 10px;
+}
+
+#main_wrapper {
+	
+}
+
+#content_wrapper {
+	text-align: left;
+	display: inline-block;
+}
+
+#main_content {
+	padding: 1em;
+	margin: 1em auto;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#side_content {
+	/*width: 20em;*/
+	padding: 1em;
+	margin: 1em auto;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#nav_cal_id {
+	padding: 15px 10px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#nav_form_id {
+	padding: 15px 10px;
+    margin-left: -5px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#nav_cal_id:hover {
+	background: #298de2;
+}
+
+#nav_form_id:hover {
+	background: #298de2;
+}

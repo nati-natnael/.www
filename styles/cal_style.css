@@ -1,0 +1,330 @@
+#nav_cal_id {
+	background: #298de2;
+}
+
+/* Left Content style */
+tr:nth-child(even) {
+	background: lightgray;
+}
+
+tr:nth-child(odd) {
+	background: white;
+}
+
+td {
+	height: 1px;
+}
+
+td span:first-of-type a {
+	font-size: 0.85em;
+	color: blue;
+}
+
+td span:nth-of-type(2) {
+	font-size: 0.85em;
+	font-style: italic;
+}
+
+#ct_div {
+	margin: auto
+}
+
+/* Top Content style */
+#top_content {
+	background: white;
+	margin-bottom: 1em;
+	border: 1px solid gray;
+}
+
+#pp_event_id {
+	padding: 0.5em;
+	margin: auto;
+}
+
+#pause_play_id {
+	width: 20px;
+	height: 20px;
+	background: #298de2;
+
+	display: inline-block;
+	vertical-align: top;
+	box-shadow: 1px 1px 5px black;
+}
+
+#pause_play_id:active {
+	box-shadow: 1px 1px 2px white,
+				inset 1px 1px 2px black;
+}
+
+#event_scroll {
+	width: 38.5em;
+	height: 5.4em;
+	overflow: hidden;
+
+	display: inline-block;
+	vertical-align: top;
+}
+
+#event_scroll a {
+	font-size: 12px;
+	color: blue;
+}
+
+#content_scroll {
+	list-style: none;
+	width: 140em;
+	margin: auto 0;
+}
+
+#content_scroll li {
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 3em;
+}
+
+#content_scroll li:nth-child(1) {
+	margin-left: 40em;
+}
+
+/* Map styling */
+#map_wrapper {
+	margin-top: 1em;
+	height: 100%;
+	border: 1px solid darkgray;
+}
+
+#map_form {
+    background: white;
+    padding: 0.5em;
+    border-bottom: 1px solid darkgray;
+}
+
+#radius_val {
+	border: 1px solid darkgray;
+}
+
+#trav_method {
+	width: 33em;
+	font-size: 0.85em;
+	font-weight: bold;
+}
+
+.map_input {
+	padding: 0.5em;
+	font-size: 0.9em;
+}
+
+.map_input input[type=text] {
+	border: 1px solid darkgray;
+}
+
+.map_input input[type=button]:active {
+	box-shadow: 1px 1px 2px white,
+				inset 1px 1px 2px black;
+}
+
+.map_input label {
+	width: 6em;
+	font-size: 0.9em;
+	font-weight: bold;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.map_radio_input {
+	border: 1px dashed lightgray;
+  padding: 0.2em;
+  line-height: 1.5em;
+  vertical-align: middle;
+	margin-right: 1em;
+	display: inline-block;
+}
+
+.map_radio_input:last-child {
+	margin-right: 0;
+}
+
+.map_radio_input span {
+	width: 5em;
+	font-size: 0.9em;
+}
+
+.map_radio_input input {
+	cursor: pointer;
+}
+
+#map_win {
+	background: white;
+	padding: 0.5em;
+	margin: auto;
+}
+
+#map {
+	height: 30em;
+	margin: auto;
+}
+
+#path_inst_wrapper {
+	background: white;
+	width: 35em;
+	margin: 1.8em auto;
+	padding: 0.5em;
+	border-top: 1px solid darkgray;
+    font-size: 0.8em;
+	display: none;
+}
+
+#path_inst_win {
+	padding-right: 1.5em;
+}
+
+#path_inst_wrapper input {
+	position: relative;
+    left: 30em;
+	margin: 0.5em;
+}
+
+#path_inst_wrapper ul {
+	max-height: 20em;
+	margin: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: none;
+}
+
+#path_inst_wrapper ul li {
+	list-style: none;
+	padding: 0.1em;
+}
+
+.instruction {
+    padding: 1em 0;
+}
+
+.inst_img {
+	width: 5%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.inst_num {
+	width: 7%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.inst_str {
+	width: 90%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.inst_info {
+    padding: 0.5em 3em;
+    font-size: 0.9em;
+}
+
+.inst_info span {
+	background: white;
+	color: #4a4a4a;
+	padding-right: 0.5em;
+}
+
+.inst_info hr {
+	margin-top: -0.5em;
+}
+
+#inst_header {
+	padding-bottom: 1em;
+}
+
+#header_hide_unhide {
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+	margin-right: 1em;
+	padding: 0.5em;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#header_hide_unhide img {
+	width: 20px;
+	height: 20px;
+}
+
+#header_description {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#header_dist_time {
+	padding: 0.5em 3em;
+    font-size: 0.9em;
+}
+
+#inst_footer {
+	margin-left: 3em;
+	padding: 1em 0;
+}
+
+/* Image styling */
+#img_wrapper {
+	padding-top: 1em;
+}
+
+#img_win {
+	background: white;
+	padding: 0.5em;
+	margin: auto;
+	border: 1px solid gray;
+	box-shadow: 1px 5px 2px white,
+				inset 1px 1px 2px black;
+}
+
+#img_win img {
+	width: 41.4em;
+}
+
+.table_img {
+	width: 100px;
+	height: 100px;
+	display: none;
+}
+
+/* Misc */
+.weekend {
+	display: none;
+}
+
+.cell_content {
+	height: 100%;
+	padding: 1em;
+}
+
+
+/* Side Content Style */
+#twitter_wrapper a {
+	margin: auto
+}
+
+#twitter_win {
+	width: 20em;
+	max-height: inherit;
+	margin: auto;
+}
+
+#twitter_win iframe {
+	height: 20em;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 1340px) {
+	#side_content {
+		display: block;
+	}
+
+	#main_content {
+		display: block;
+	}
+}
