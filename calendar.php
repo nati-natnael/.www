@@ -26,7 +26,67 @@
 					<div id="table_wrapper">
 						<!-- Calendar Table -->
 						<div id="ct_div">
-							
+							<?php
+								function readCalendarJson($filePath) {
+									try {
+										$jsonFile = fopen($filePath, "r") or die("Error on opening file");
+										
+										# Read Entire file
+										$size = filesize($filePath);
+										$jsonString = fread($jsonFile, $size);
+										
+										fclose($jsonFile);
+										
+										$jsonObject = json_decode($jsonString, true);
+										
+										return $jsonObject;
+									} catch (Exception $e) {
+										echo 'Error: ' . $e->getMessage();
+										return null;
+									}
+								}
+								
+								function singleDayEvent($eName, $sTime, $eTime, $loc, $day) {
+									$htmlElement  = "<div id='" . $day . "' style='border: 1px solid black;'>";
+									$htmlElement .= "<span class='e_name'>" . $eName . "</span> <br>";
+									$htmlElement .= "<span class='s_time'>" . $sTime . "</span>";
+									$htmlElement .= "<span class='en_time'>" . $eTime . "</span> <br>";
+									$htmlElement .= "<span class='location'>" . $loc   . "</span>";
+									//$htmlElement .= "<span class='day'>" . $day   . "</span>";
+									$htmlElement .= "</div>";
+									
+									return $htmlElement;
+								}
+								
+								function getDayEvents($calJson, $day, $sortBy) {
+									$dayEventArray = $calJson[$day];
+									
+									# returned value
+									$eventDivArray = [];
+									
+									foreach ($dayEventArray as $dayEvent) {
+										$eName = $dayEvent['event_name'];
+										$sTime = $dayEvent['start_time'];
+										$eTime = $dayEvent['end_time'];
+										$loc   = $dayEvent['location'];
+										$day   = $dayEvent['day'];										
+									
+										$eventDiv = singleDayEvent($eName, $sTime, $eTime, $loc, $day);
+										array_push($eventDivArray, $eventDiv);
+									}
+									
+									return $eventDivArray;
+								}
+								
+								function createCalendar($calJson) {
+									
+								}
+																
+								$calJson = readCalendarJson("json/calendar.txt");
+								$monEvents = getDayEvents($calJson, 'monday', '');
+								
+								print_r($monEvents);
+							?>
 						</div>
 					</div>
 

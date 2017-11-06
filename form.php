@@ -131,7 +131,7 @@
 						 * Redirect to calendar page if event add was successful 
 						 */
 						function redirect () {
-							header('Location: http://localhost/mysite/calendar.php', true, 301);
+							header('Location: http://localhost/.www/calendar.php', true, 301);
 							die();
 						}
 					
