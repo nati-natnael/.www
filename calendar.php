@@ -14,7 +14,7 @@
 			<!-- navigation -->
 			<nav id="main_nav">
 				<a href="#"><div id="nav_cal_id">MyCalendar</div></a>
-				<a href="form.html"><div id="nav_form_id">Form Input</div></a>
+				<a href="form.php"><div id="nav_form_id">Form Input</div></a>
 			</nav>
 			
 			<div id="content_wrapper">				
@@ -26,11 +26,7 @@
 					<div id="table_wrapper">
 						<!-- Calendar Table -->
 						<div id="ct_div">
-							<?php 
 							
-								echo "<p>it works</>";
-
-							?>
 						</div>
 					</div>
 
