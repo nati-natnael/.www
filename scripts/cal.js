@@ -23,12 +23,11 @@ class Table_Events {
 		var events = $$('cell_content');
 		for (var i = 0; i < events.length; i++) {
 			var event = events[i];
-			var event_name = event.childNodes[0].data.trim();
+			var event_name = event.childNodes[0].innerText.trim();
 			var location = event.childNodes[3];
 
 			if (location.hasChildNodes()) {
-				var location_nodes = location.childNodes;
-				var location_name = location_nodes[1].innerText;
+				var location_name = location.innerText;
 				var value = {name: event_name, loc: location_name.trim()};
 
 				if (!uniqueEventLocations.includes(value)) {
@@ -129,7 +128,7 @@ class Table_Events {
 	 * Order all event under all day columns.
 	 */
 	catagorize_table() {
-		var days = ['mon_td', 'tues_td', 'wed_td', 'thur_td', 'fri_td']
+		var days = ['mon_td', 'tues_td', 'wed_td', 'thur_td', 'fri_td'];
 
 		days.forEach(function (element) {
 			_reorder_by(element, 3);
@@ -152,7 +151,7 @@ class Table_Events {
 		inner_lst = _sort(inner_lst, nth_child);
 		var sorted;
 
-		for (var i = 0; i < eles.length; i++) {
+		for (i = 0; i < eles.length; i++) {
 			sorted = inner_lst[i];
 			eles[i].innerHTML = '';
 			eles[i].appendChild(sorted);
@@ -202,8 +201,8 @@ class Table_Events {
 
 		// Added the list items with breaks
 		for (var i = 0; i < events.length; i++) {
-			var val = events[i].innerHTML
-			val = val.trim()
+			var val = events[i].innerHTML;
+			val = val.trim();
 
 			if (val.length !== 0) {
 				eventValue += "<li>" + val + "</li>";
@@ -310,7 +309,7 @@ class GoogleMaps {
 		};
 
 		this.direction.route (request, function (response, status) {
-			if (status = 'OK') {
+			if (status === 'OK') {
 				google_that.renderer.setDirections(response);
 				var route = response.routes[0].legs[0];
 
@@ -323,8 +322,7 @@ class GoogleMaps {
 			  	path_list += '<div id="inst_header">';
 
 			  	// hide/unhide button
-			  	path_list += '<div id="header_hide_unhide" data-value="false"' 
-			  				    +       'onclick="hideUnhidePathDescription()">';
+			  	path_list += '<div id="header_hide_unhide" data-value="false" onclick="hideUnhidePathDescription()">';
 			  	path_list += '<img id="hide_unhide_img" src="imgs/unhide.png" alt="Hide unhide image">';
 			  	path_list += '</div>';
 
@@ -430,7 +428,7 @@ class GoogleMaps {
 
 		var request = {
 			address: searchName
-		}
+		};
 
 		geocoder.geocode (request, function (results, status) {
 			if (status == 'OK') {
@@ -446,7 +444,6 @@ class GoogleMaps {
 		google_that = this;  // save this object for call back function
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition (function (pos) {
-				var coords = pos.coords;
 				var lat = parseFloat(pos.coords.latitude);
 				var lng = parseFloat(pos.coords.longitude);
 
@@ -520,6 +517,20 @@ class GoogleMaps {
 	}
 }
 // ----------------------------------------------------------
+function loadImage (ele, srcURL) {	
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.open("GET", srcURL, true);
+	xmlHttp.send();
+	
+	xmlhttp.onreadystatechange = function () {
+		var state = xmlhttp.readyState;
+		var status = xmlhttp.status;
+		if (state == 4 && status == 200) {
+			var node = ele.childNodes[8];
+			node.innerHTML = xmlhttp.responseText;
+		}
+	};
+}
 
 // Mouse over callback function
 function moShowImage (event) {
@@ -538,7 +549,9 @@ function moShowImage (event) {
 
 	// td -> div -> img
 	var ele = obj.childNodes[9];
-	ele.style.display = 'block';
+	console.log(ele);
+	var url = ele.childNodes[0].innerText;
+	loadImage(ele, url);
 }
 
 // Mouse out callback function
@@ -684,29 +697,12 @@ function hideUnhidePathDescription() {
 	}
 }
 
-/**
- * Pause and play daily event 
- * scroll.
- */
-function pausePlay() {
-	var ele = $('pause_play_id');
-	var val = ele.alt;
-
-	if (val === "false") {
-		table.startScroll('content_scroll');
-		ele.alt = "true";
-	} else {
-		table.stopScroll();
-		ele.alt = "false";
-	}
-}
-
 // Main Invoke Method
 window.onload = function () { 
 	initMap();
 	initTableEvents();
 	mapMarkEvent();
-	table.scrollInit('event_scroll', 'content_scroll');
+	//table.scrollInit('event_scroll', 'content_scroll');
 }
 
 

@@ -19,7 +19,6 @@
 				<!-- Heading -->
 				<div id="main_content">
 					<?php
-					
 						/**
 						 * Validate posted values
 						 *
@@ -33,7 +32,7 @@
 							
 							foreach ($pieces as $piece) {
 								$match = preg_match($pattern, $piece);
-								echo "String: $piece | Match: $match <br>";
+								//echo "String: $piece | Match: $match <br>";
 								
 								# If any string piece doesn't match stop
 								if (!$match) {
@@ -60,7 +59,8 @@
 									$jsonString = fread($jsonFile, $size);
 								} else {
 									# Create empty json if file is empty
-									$jsonString = '{"monday": [], "tuesday": [], "wednesday": [], "thursday": [], "friday": []}';
+									$jsonString = '{"monday": [], "tuesday": [],
+												    "wednesday": [], "thursday": [], "friday": []}';
 								}
 								
 								fclose($jsonFile);
@@ -83,23 +83,27 @@
 								$encodedJson = json_encode($json);
 								fwrite($file, $encodedJson);
 								fclose($file);
+								
+								return TRUE;
 							} catch (Exception $e) {
 								echo 'Error: ' . $e->getMessage();
+								return FALSE;
 							}
 						}
 						
-						function addEvent (&$json, $eventName, $startTime, $endTime, $location, $day) {
+						/**
+						 * Adde new Event to calendar json
+						 */
+						function addEvent (&$json, $eventName, $startTime, $endTime, $location, $day, $imgURL) {
 							$newEvent = new \stdClass();
 							$newEvent -> event_name = $eventName;
 							$newEvent -> start_time = $startTime;
 							$newEvent -> end_time = $endTime;
 							$newEvent -> location = $location;
-							$newEvent -> day = $day;
+							$newEvent -> img_url = $imgURL;
 							
 							$newEventJson = json_encode($newEvent);
 							$newEventJson = json_decode($newEventJson, true);
-							
-							//print_r($newEventJson);
 							
 							switch ($day) {
 								case "Monday":
@@ -136,34 +140,65 @@
 						}
 					
 						# Handle POST request
-						if($_SERVER['REQUEST_METHOD'] == 'POST') {
-							$eventName = $_POST['eventname'];
-							$startTime = $_POST['starttime'];
-							$endTime   = $_POST['endtime'];
-							$location  = $_POST['location'];
-							$day 	   = $_POST['day'];
-							
-							if (validate($eventName)) {
-								if (validate($location)) {
-									$eventJSonFilePath = "json/calendar.txt";
-									$eventJson = readJSonFile($eventJSonFilePath);
+						function postHandle() {
+							if($_SERVER['REQUEST_METHOD'] == 'POST') {								
+								$eventName = $_POST['eventname'];
+								$startTime = $_POST['starttime'];
+								$endTime   = $_POST['endtime'];
+								$location  = $_POST['location'];
+								$day 	   = $_POST['day'];
+								$imgURL	   = $_POST['img_url'];
+								$btn	   = $_POST['submit'];
+								
+								# Clearing calendar events
+								if ($btn === "Clear") {
+									$jsonString = json_decode('{"monday": [], "tuesday": [],
+																"wednesday": [], "thursday": [],
+																"friday": []}');
 									
-									if ($eventJson != null) {
-										// echo json_encode($eventJson) . "<br>";
-										addEvent($eventJson, $eventName, $startTime, $endTime, $location, $day);																		
-										writeJSonToFile($eventJSonFilePath, $eventJson);
-										redirect();
-										// echo json_encode($eventJson) . "<br>";
+									$status = writeJSonToFile("json/calendar.txt", $jsonString);
+									
+									if ($status) {
+										$clearMsg  = "<p style='color: green;'>";
+										$clearMsg .= "<img src='imgs/check_mark.png'
+														   alt='Check Mark Image'
+														   style='width: 1.1em; height: 1.1em;'> ";
+										$clearMsg .= "<span style='vertical-align: top'>Calendar events cleared.</span>";
+										$clearMsg .= "</p>";
+									
+										echo $clearMsg;
+									} else {
+										$clearMsg  = "<p style='color: red;'>";
+										$clearMsg .= "<img src='imgs/err_img.png'
+														   alt='Check Mark Image'
+														   style='width: 1.1em; height: 1.1em;'> ";
+										$clearMsg .= "<span style='vertical-align: top'>Unable to clear events.</span>";
+										$clearMsg .= "</p>";
+										
+										echo $clearMsg;
 									}
 								} else {
-									echo "Location must be alpha-numeric!!!<br>";
+									if (validate($eventName)) {
+										if (validate($location)) {
+											$eventJSonFilePath = "json/calendar.txt";
+											$eventJson = readJSonFile($eventJSonFilePath);
+											
+											if ($eventJson != null) {
+												addEvent($eventJson, $eventName, $startTime, $endTime, $location, $day, $imgURL);																		
+												writeJSonToFile($eventJSonFilePath, $eventJson);
+												redirect();
+											}
+										} else {
+											echo "Location must be alpha-numeric!!!<br>";
+										}
+									} else {
+										echo "Event Name must be alpha-numeric!!!<br>";
+									}	
 								}
-							} else {
-								echo "Event Name must be alpha-numeric!!!<br>";
-							}							
-							
+							}
 						}
 						
+						postHandle();
 					?>
 					<!-- <h2 id="heading">Calendar Input</h2> -->
 					<div id="event_form_wrapper">
@@ -205,6 +240,15 @@
 											<input id="location_in" type="text" name="location">
 										</div>
 									</div>
+									
+									<div id="img_id">
+										<div class="label_ele">
+											<label>Image url:</label>
+										</div>
+										<div class="input_ele">
+											<input id="img_in" type="text" name="img_url">
+										</div>
+									</div>
 
 									<div id="dotw_id">
 										<div class="label_ele">
@@ -224,6 +268,7 @@
 
 									<div id="s_id">
 										<input type="submit" name="submit" value="Submit">
+										<input type="submit" name="submit" value="Clear">
 									</div>
 								</div>		
 							</form>

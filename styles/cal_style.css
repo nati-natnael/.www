@@ -20,9 +20,19 @@ td span:first-of-type a {
 	color: blue;
 }
 
-td span:nth-of-type(2) {
+.s_time, .e_time {
 	font-size: 0.85em;
 	font-style: italic;
+}
+
+.location {
+	font-size: 0.85em;
+	color: blue;
+}
+
+#search_wrapper {
+	text-align: right;
+	/*padding: 1em 0.3em;*/
 }
 
 #ct_div {
