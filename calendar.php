@@ -117,7 +117,10 @@
 								 * return: Div containing event detail
 								 */
 								function singleEvent($eName, $sTime, $eTime, $loc, $imgURL) {
-									$htmlElement  = "<div class='cell_content'>";
+									$htmlElement  = "<div class='cell_content'";
+									$htmlElement .= "onmouseover='moShowImage(event)'";
+									$htmlElement .= "onmouseout='mtShowImage(event)'";	
+									$htmlElement .= ">";
 									
 									$htmlElement .= "<span class='e_name'>" . capitalizeWords($eName) . "</span> <br>";									
 									$htmlElement .= "<span class='location'>" . capitalizeWords($loc)   . "</span> <br>";

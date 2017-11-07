@@ -1,1 +1,1 @@
-{"monday":[],"tuesday":[],"wednesday":[],"thursday":[],"friday":[]}
+{"monday":[{"event_name":"Hello","start_time":"","end_time":"","location":"N","img_url":""}],"tuesday":[],"wednesday":[],"thursday":[],"friday":[]}

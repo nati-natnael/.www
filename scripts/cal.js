@@ -251,7 +251,7 @@ class GoogleMaps {
 			zoom: this.zoom_lvl
 		});
 
-		this.info_view = new google.maps.InfoWindow;
+		this.info_view = new google.maps.InfoWindow();
 		this.direction = null;
 
 		this.renderer = null;
@@ -522,12 +522,12 @@ function loadImage (ele, srcURL) {
 	xmlHttp.open("GET", srcURL, true);
 	xmlHttp.send();
 	
-	xmlhttp.onreadystatechange = function () {
-		var state = xmlhttp.readyState;
-		var status = xmlhttp.status;
+	xmlHttp.onreadystatechange = () => {
+		var state = xmlHttp.readyState;
+		var status = xmlHttp.status;
 		if (state == 4 && status == 200) {
-			var node = ele.childNodes[8];
-			node.innerHTML = xmlhttp.responseText;
+			console.log(xmlHttp.responseText);
+			ele.innerHTML = xmlHttp.responseText;
 		}
 	};
 }
@@ -538,7 +538,7 @@ function moShowImage (event) {
 	var obj_name = target.tagName;
 	var obj = target;
 
-	// If clicked on child elements
+	// If hovered on child elements
 	if (obj_name === 'SPAN') {
 		obj = target.parentElement;
 	} else if (obj_name === 'A') {
@@ -549,9 +549,12 @@ function moShowImage (event) {
 
 	// td -> div -> img
 	var ele = obj.childNodes[9];
-	console.log(ele);
-	var url = ele.childNodes[0].innerText;
+	var url = ele.innerText;
+	
+	// Ajax image loader
 	loadImage(ele, url);
+	
+	ele.style.display = 'block';
 }
 
 // Mouse out callback function
@@ -571,6 +574,7 @@ function mtShowImage(event) {
 
 	// td -> div -> img
 	var ele = obj.childNodes[9];
+	ele.innerHTML = '';
 	ele.style.display = 'none';
 }
 // ----------------------------------------------------------
@@ -703,6 +707,6 @@ window.onload = function () {
 	initTableEvents();
 	mapMarkEvent();
 	//table.scrollInit('event_scroll', 'content_scroll');
-}
+};
 
 
