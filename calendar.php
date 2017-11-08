@@ -25,8 +25,8 @@
 					
 					<div id="search_wrapper">
 						<div id="search">
-							<input type="text" name="search">
-							<input type="button" name="searchbtn" value="Search">
+							<input id="search_val" type="text" name="search">
+							<input type="button" name="searchbtn" value="Search" onclick="searchOnClick()">
 						</div>
 					</div>
 
@@ -248,11 +248,10 @@
 
 					<!-- Map -->
 					<div id="map_wrapper">
-						<div id="map_form">
+						<!--<div id="map_form">
 							<form>
-								<!-- Search Radius -->
+								<!-- Search Radius
 								<div class="map_input" id="radius">
-									<!-- <label>Radius: </label> -->
 									<input id="radius_val" 
 										   type="number" 
 										   name="radius"
@@ -262,9 +261,8 @@
 									       value="Find Nearby Restaurants"
 									       onclick="searchRestaurants()">
 								</div>
-								<!-- Destinations -->
+								<!-- Destinations
 								<div class="map_input" id="destination">
-									<!-- <label>Direction: </label> -->
 									<input id="address" 
 										   type="text" 
 										   name="address"
@@ -274,7 +272,7 @@
 										   value="Get Direction" 
 										   onclick="onClickSearchDirection()">
 								</div>
-								<!-- Travel Method -->
+								<!-- Travel Method
 								<div class="map_input" id="trav_mode">
 									<div class="map_radio_input">
 										<input class="trav_mode" 
@@ -314,7 +312,7 @@
 									</div>
 								</div>
 							</form>
-						</div>
+						</div>-->
 												
 						<div id="map_win">
 							<div id="map_inner_win">

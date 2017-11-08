@@ -517,6 +517,32 @@ class GoogleMaps {
 	}
 }
 // ----------------------------------------------------------
+
+// --- Search functionalies ---------------------------------
+function searchOnClick() {
+	var search = $('search_val');
+	var serVal = search.value;
+	
+	var wordReg = /[a-zA-Z]+/;
+	
+	if (serVal !== '') {
+		if (wordReg.test(serVal)) {
+			gm.getCurrentLocation(() => {
+				gm.getLocationOf(serVal, getLocOfCallback);
+			});
+		} else if (!isNaN(serVal)) {
+			var radius = parseInt(serVal);
+			if (!Number.isNaN(radius)) {
+				hideInstructions ();
+				gm.searchPlaceType('restaurant', radius);
+			}
+		} else {
+			alert('Please Enter address or radius');
+		}
+	}
+}
+// ----------------------------------------------------------
+// --- Mouse over callback function for table cells
 function loadImage (ele, srcURL) {	
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("GET", srcURL, true);
@@ -536,7 +562,6 @@ function loadImage (ele, srcURL) {
 	};
 }
 
-// Mouse over callback function
 function moShowImage (event) {
 	var target = event.srcElement || event.target;
 	//var obj_name = target.tagName;
@@ -570,16 +595,20 @@ function moShowImage (event) {
 function mtShowImage(event) {
 	// event applied to
 	var target = event.srcElement || event.target;
-	//var obj_name = target.tagName;
 	var obj = target;
 
 	// If hovered on child elements
 	while (obj && obj.parentElement && obj != window) {
-		if (obj.tagName === 'DIV') {			
+		if (obj.tagName === 'DIV') {
 			// td -> div -> img
 			var ele = obj.childNodes[9];
-			ele.removeChild(ele.lastChild);
+			
+			if (ele.hasChildNodes()) {
+				ele.removeChild(ele.lastChild);
+			}
 			ele.style.display = 'none';
+			
+			return false;
 		} else {
 			if (obj.preventDefault) {
 				obj.preventDefault();
@@ -592,7 +621,7 @@ function mtShowImage(event) {
 
 var cells = $$('cell_content');
 for (var i = 0; i < cells.length; i++) {
-	cells[i].addEventListener('mouseover', moShowImage, true);
+	cells[i].addEventListener('mouseover', moShowImage, false);
 	cells[i].addEventListener('mouseout', mtShowImage, true);	
 }
 // ----------------------------------------------------------
@@ -691,10 +720,15 @@ function searchDirection (dest) {
 	var travel_mode_ele = $$('trav_mode');
 
 	var travel_mode = "";
-	for (var i = 0; i < travel_mode_ele.length; i++) {
-		if (travel_mode_ele[i].checked) {
-			travel_mode = travel_mode_ele[i].value;
+	
+	if (travel_mode_ele.length !== 0) {
+		for (var i = 0; i < travel_mode_ele.length; i++) {
+			if (travel_mode_ele[i].checked) {
+				travel_mode = travel_mode_ele[i].value;
+			}
 		}
+	} else {
+		travel_mode = "DRIVING";
 	}
 
 	gm.searchPath(gm.curLocation, dest.geometry.location, travel_mode);
