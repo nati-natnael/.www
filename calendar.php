@@ -24,8 +24,10 @@
 					<!-- <h2 id="heading">My Calendar</h2> -->
 					
 					<div id="search_wrapper">
-						<input type="text" name="search">
-						<input type="button" name="searchbtn" value="Search">
+						<div id="search">
+							<input type="text" name="search">
+							<input type="button" name="searchbtn" value="Search">
+						</div>
 					</div>
 
 					<div id="table_wrapper">
@@ -136,7 +138,9 @@
 									$htmlElement .= $eTime;
 									$htmlElement .= "</span>";
 																		
-									$htmlElement .= "<div class='hidden' style='display: none;'>" . $imgURL  . "</span>";
+									$htmlElement .= "<span class='hidden' style='display: none;'";
+									$htmlElement .= "data-url='" . $imgURL . "'";
+									$htmlElement .= "></span>";
 									
 									$htmlElement .= "</div>";
 									

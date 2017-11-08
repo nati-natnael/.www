@@ -520,14 +520,18 @@ class GoogleMaps {
 function loadImage (ele, srcURL) {	
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("GET", srcURL, true);
+	xmlHttp.responseType = 'blob';
 	xmlHttp.send();
 	
 	xmlHttp.onreadystatechange = () => {
 		var state = xmlHttp.readyState;
 		var status = xmlHttp.status;
 		if (state == 4 && status == 200) {
-			console.log(xmlHttp.responseText);
-			ele.innerHTML = xmlHttp.responseText;
+			var newImg = document.createElement('img');
+			newImg.style.width = '100px';
+			newImg.style.height = '100px';
+			newImg.src = window.URL.createObjectURL(xmlHttp.response);
+			ele.appendChild(newImg);
 		}
 	};
 }
@@ -535,47 +539,61 @@ function loadImage (ele, srcURL) {
 // Mouse over callback function
 function moShowImage (event) {
 	var target = event.srcElement || event.target;
-	var obj_name = target.tagName;
+	//var obj_name = target.tagName;
 	var obj = target;
 
 	// If hovered on child elements
-	if (obj_name === 'SPAN') {
-		obj = target.parentElement;
-	} else if (obj_name === 'A') {
-		obj = target.parentElement.parentElement;
-	} else if (obj_name === 'IMG') {
-		obj = target.parentElement;
+	while (obj && obj.parentElement && obj != window) {
+		if (obj.tagName === 'DIV') {
+			// td -> div -> img
+			var ele = obj.childNodes[9];
+			var url = ele.getAttribute('data-url');
+			
+			if (url !== '') {
+				// Ajax image loader
+				loadImage(ele, url);
+				ele.style.display = 'block';
+			}
+			
+			return false;
+		} else {
+			if (obj.preventDefault) {
+				obj.preventDefault();
+			}
+		}
+		
+		obj = obj.parentElement;
 	}
-
-	// td -> div -> img
-	var ele = obj.childNodes[9];
-	var url = ele.innerText;
-	
-	// Ajax image loader
-	loadImage(ele, url);
-	
-	ele.style.display = 'block';
 }
 
 // Mouse out callback function
 function mtShowImage(event) {
+	// event applied to
 	var target = event.srcElement || event.target;
-	var obj_name = target.tagName;
+	//var obj_name = target.tagName;
 	var obj = target;
 
-	// If clicked on child elements
-	if (obj_name === 'SPAN') {
-		obj = target.parentElement;
-	} else if (obj_name === 'A') {
-		obj = target.parentElement.parentElement;
-	} else if (obj_name === 'IMG') {
-		obj = target.parentElement;
+	// If hovered on child elements
+	while (obj && obj.parentElement && obj != window) {
+		if (obj.tagName === 'DIV') {			
+			// td -> div -> img
+			var ele = obj.childNodes[9];
+			ele.removeChild(ele.lastChild);
+			ele.style.display = 'none';
+		} else {
+			if (obj.preventDefault) {
+				obj.preventDefault();
+			}
+		}
+		
+		obj = obj.parentElement;
 	}
+}
 
-	// td -> div -> img
-	var ele = obj.childNodes[9];
-	ele.innerHTML = '';
-	ele.style.display = 'none';
+var cells = $$('cell_content');
+for (var i = 0; i < cells.length; i++) {
+	cells[i].addEventListener('mouseover', moShowImage, true);
+	cells[i].addEventListener('mouseout', mtShowImage, true);	
 }
 // ----------------------------------------------------------
 

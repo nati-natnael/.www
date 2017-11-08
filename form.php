@@ -189,10 +189,10 @@
 												redirect();
 											}
 										} else {
-											echo "Location must be alpha-numeric!!!<br>";
+											echo "<span style='color: red;'>Location must be alpha-numeric!!!</span><br>";
 										}
 									} else {
-										echo "Event Name must be alpha-numeric!!!<br>";
+										echo "<span style='color: red;'>Event Name must be alpha-numeric!!!</span><br>";
 									}	
 								}
 							}
@@ -219,7 +219,7 @@
 											<label>Start Time:</label>
 										</div>
 										<div class="input_ele">
-											<input type="time" name="starttime">
+											<input type="time" name="starttime" required>
 										</div>
 									</div>
 
@@ -228,7 +228,7 @@
 											<label>End Time:</label>
 										</div> 
 										<div class="input_ele">
-											<input type="time" name="endtime">
+											<input type="time" name="endtime" required>
 										</div>
 									</div>
 

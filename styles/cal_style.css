@@ -1,8 +1,30 @@
+/* Search box */
+#search {
+	background: white;
+	border: 1px solid lightgray;
+	display: inline-block;	
+}
+
+#search input[type=button] {
+	margin-right: 0.4em;
+}
+
+#search input[type=text] {
+	width: 15em;
+	height: 1.75em;
+	margin-right: -5px;
+}
+
 #nav_cal_id {
 	background: #298de2;
 }
 
 /* Left Content style */
+/* Table */
+#table_wrapper {
+	margin-top: 1em;	
+}
+
 tr:nth-child(even) {
 	background: lightgray;
 }
