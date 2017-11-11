@@ -1,1 +1,1 @@
-{"monday":[{"event_name":"Natnael","start_time":"02:20","end_time":"02:20","location":"Mecanical building UMN","img_url":"http:\/\/localhost\/.www\/imgs\/hide.png"}],"tuesday":[{"event_name":"Natnael","start_time":"02:20","end_time":"02:20","location":"Mecanical building UMN","img_url":""}],"wednesday":[],"thursday":[],"friday":[]}
+{"monday":[],"tuesday":[{"event_name":"5204","start_time":"09:45","end_time":"11:00","location":"Mecanical building UMN","img_url":"http:\/\/localhost\/.www\/imgs\/hide.png"}],"wednesday":[],"thursday":[],"friday":[]}

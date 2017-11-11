@@ -25,8 +25,8 @@
 					
 					<div id="search_wrapper">
 						<div id="search">
-							<input id="search_val" type="text" name="search">
-							<input type="button" name="searchbtn" value="Search" onclick="searchOnClick()">
+							<input id="search_val" type="text" placeholder="Address or Radius">
+							<input type="button" value="Search" onclick="searchOnClick()">
 						</div>
 					</div>
 
@@ -247,73 +247,7 @@
 					</div>
 
 					<!-- Map -->
-					<div id="map_wrapper">
-						<!--<div id="map_form">
-							<form>
-								<!-- Search Radius
-								<div class="map_input" id="radius">
-									<input id="radius_val" 
-										   type="number" 
-										   name="radius"
-										   placeholder="Radius">
-									<input type="button" 
-									       name="findRestaurants" 
-									       value="Find Nearby Restaurants"
-									       onclick="searchRestaurants()">
-								</div>
-								<!-- Destinations
-								<div class="map_input" id="destination">
-									<input id="address" 
-										   type="text" 
-										   name="address"
-										   placeholder="Type address here">
-									<input type="button" 
-										   name="address_button" 
-										   value="Get Direction" 
-										   onclick="onClickSearchDirection()">
-								</div>
-								<!-- Travel Method
-								<div class="map_input" id="trav_mode">
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="DRIVING" 
-											   onclick="onClickSearchDirection()"
-											   checked>
-										<span>Driving</span> 
-									</div>
-
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="WALKING"
-											   onclick="onClickSearchDirection()">
-										<span>Walking</span>
-									</div>
-
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="TRANSIT"
-											   onclick="onClickSearchDirection()">
-										<span>Transit</span> 
-									</div>
-
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="BICYCLING"
-											   onclick="onClickSearchDirection()">
-										<span>Bicycling</span> 
-									</div>
-								</div>
-							</form>
-						</div>-->
-												
+					<div id="map_wrapper">												
 						<div id="map_win">
 							<div id="map_inner_win">
 								<div id="map">

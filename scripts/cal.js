@@ -280,11 +280,11 @@ class GoogleMaps {
 
 		this.info_view = new google.maps.InfoWindow();
 		var service = new google.maps.places.PlacesService(this.map);
-		service.nearbySearch(request, function (results, status) {
+		service.nearbySearch(request, (results, status) => {
 			if (status == google.maps.places.PlacesServiceStatus.OK) {
 				for (var i = 0; i < results.length; i++) {
 					var p = results[i];
-					google_that.markMapPlace(p, google.maps.Animation.DROP);
+					this.markMapPlace(p, google.maps.Animation.DROP);
 				}
 			}
 		});
@@ -308,9 +308,9 @@ class GoogleMaps {
 			travelMode: trans_mode
 		};
 
-		this.direction.route (request, function (response, status) {
+		this.direction.route (request, (response, status) => {
 			if (status === 'OK') {
-				google_that.renderer.setDirections(response);
+				this.renderer.setDirections(response);
 				var route = response.routes[0].legs[0];
 
 				// Get Parent element
@@ -430,7 +430,7 @@ class GoogleMaps {
 			address: searchName
 		};
 
-		geocoder.geocode (request, function (results, status) {
+		geocoder.geocode (request, (results, status) => {
 			if (status == 'OK') {
 				callback(results[0]);
 			} else {
@@ -441,13 +441,13 @@ class GoogleMaps {
 
 	// 
 	getCurrentLocation (callback) {
-		google_that = this;  // save this object for call back function
+		//google_that = this;  // save this object for call back function
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition (function (pos) {
+			navigator.geolocation.getCurrentPosition ((pos) => {
 				var lat = parseFloat(pos.coords.latitude);
 				var lng = parseFloat(pos.coords.longitude);
 
-				google_that.curLocation = new google.maps.LatLng(lat, lng);
+				this.curLocation = new google.maps.LatLng(lat, lng);
 
 				callback();
 			}, function (error) {
@@ -486,10 +486,10 @@ class GoogleMaps {
 				});
 
 		// Add action listener to each marker
-		google.maps.event.addListener(mark, 'click', function () {
+		google.maps.event.addListener(mark, 'click', () => {
 			var cont = '<b>'+content+'</b>' + '<br>' + geoLoc.formatted_address;
-			google_that.info_view.setContent(cont);
-			google_that.info_view.open(google_that.map, this);
+			this.info_view.setContent(cont);
+			this.info_view.open(google_that.map, this);
 		});
 
 		google_that.eventMarkersArray.push(mark);
@@ -507,18 +507,36 @@ class GoogleMaps {
 				});
 
 		// Add action listener to each marker
-		google.maps.event.addListener(mark, 'click', function () {
+		google.maps.event.addListener(mark, 'click', () => {
 			var content = '<b>'+place.name+'</b>' + '<br>' + place.vicinity;
-			google_that.info_view.setContent(content);
-			google_that.info_view.open(google_that.map, this);
+			this.info_view.setContent(content);
+			this.info_view.open(google_that.map, this);
 		});
 
-		google_that.placeMarkersArray.push(mark);
+		this.placeMarkersArray.push(mark);
 	}
 }
 // ----------------------------------------------------------
 
 // --- Search functionalies ---------------------------------
+document.addEventListener('keypress', (event) => {
+	const key = event.keyCode;
+	
+	if (key === 13) {
+		searchOnClick();
+	}
+});
+
+function displayClearButton() {
+	var ele = $('search_clear');
+	
+	if (ele.value !== '') {
+		ele.style.display = 'inline';
+	} else {
+		ele.style.display = 'none';
+	}
+}
+
 function searchOnClick() {
 	var search = $('search_val');
 	var serVal = search.value;
@@ -642,7 +660,7 @@ for (var i = 0; i < cells.length; i++) {
 var gm;  // Google map object
 var table;
 function initMap () {
-	gm = new GoogleMaps('map', {lat: 44, lng: -93}, 14);
+	gm = new GoogleMaps('map', {lat: 44.973894, lng: -93.2344463}, 14);
 } 
 
 function initTableEvents () {
@@ -654,14 +672,11 @@ function initTableEvents () {
 function mapMarkEvent() {
 	var event_vals = table.getUniqueEvents();
 	for (var i = 0; i < event_vals.length; i++) {
-		markEventCallback(event_vals[i]);
+		//
+		gm.getLocationOf(event_vals[i].loc, (pos) => {
+			gm.markMapLocation(pos, google.maps.Animation.BOUNCE, () => {return event_vals[i].name;});
+		});
 	} 
-}
-
-function markEventCallback (event_val) {
-	gm.getLocationOf(event_val.loc, function (pos) {
-		gm.markMapLocation(pos, google.maps.Animation.BOUNCE, event_val.name);
-	});
 }
 // ----------- End of Event Mark -------------------------
 
@@ -697,30 +712,28 @@ function searchRestaurants () {
 // ---------------- End -----------------------------------
 
 // ---- Sequence of Search location callback functions ----
-var start_location;
 function onClickSearchDirection() {
-	gm.getCurrentLocation(getCurLocCallback);
-}
+	gm.getCurrentLocation(() => {
+		var address_ele = $('address');
 
-function getCurLocCallback () {
-	var address_ele = $('address');
+		if (address_ele.value !== '') {
+			gm.getLocationOf(address_ele.value, () => {
+				var address_ele = $('address');
 
-	if (address_ele.value === '') {
-		console.log('We need an address to search for');
-	} else {
-		gm.getLocationOf(address_ele.value, getLocOfCallback);
-	}	
-}
-
-function getLocOfCallback (dest_location) {
-	searchDirection(dest_location);
+				if (address_ele.value !== '') {
+					gm.getLocationOf(address_ele.value, () => {
+						searchDirection(dest_location);
+					});
+				}
+			});
+		} 
+	});
 }
 
 function searchDirection (dest) {
 	var travel_mode_ele = $$('trav_mode');
 
 	var travel_mode = "";
-	
 	if (travel_mode_ele.length !== 0) {
 		for (var i = 0; i < travel_mode_ele.length; i++) {
 			if (travel_mode_ele[i].checked) {

@@ -219,7 +219,7 @@
 											<label>Start Time:</label>
 										</div>
 										<div class="input_ele">
-											<input type="time" name="starttime" required>
+											<input type="time" name="starttime">
 										</div>
 									</div>
 
@@ -228,7 +228,7 @@
 											<label>End Time:</label>
 										</div> 
 										<div class="input_ele">
-											<input type="time" name="endtime" required>
+											<input type="time" name="endtime">
 										</div>
 									</div>
 
