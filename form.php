@@ -27,22 +27,22 @@
 						function validate($string) {
 							$pattern = "/^[a-z0-9]+$/";
 							$lowerString = strtolower($string);
-							
+
 							$pieces = explode(" ", $lowerString);
-							
+
 							foreach ($pieces as $piece) {
 								$match = preg_match($pattern, $piece);
 								//echo "String: $piece | Match: $match <br>";
-								
+
 								# If any string piece doesn't match stop
 								if (!$match) {
 									return false;
 								}
 							}
-							
+
 							return $match;
 						}
-												
+
 						/**
 						 * Reads file containing json object.
 						 * file must only contain one JSon object.
@@ -52,7 +52,7 @@
 						function readJSonFile ($filePath) {
 							try {
 								$jsonFile = fopen($filePath, "r") or die("Error on opening file");
-								
+
 								# Read Entire file
 								$size = filesize($filePath);
 								if ($size > 0) {
@@ -62,18 +62,18 @@
 									$jsonString = '{"monday": [], "tuesday": [],
 												    "wednesday": [], "thursday": [], "friday": []}';
 								}
-								
+
 								fclose($jsonFile);
-								
+
 								$jsonObject = json_decode($jsonString, true);
-								
+
 								return $jsonObject;
 							} catch (Exception $e) {
 								echo 'Error: ' . $e->getMessage();
 								return null;
 							}
 						}
-						
+
 						/**
 						 * Write json to file
 						 */
@@ -83,14 +83,14 @@
 								$encodedJson = json_encode($json);
 								fwrite($file, $encodedJson);
 								fclose($file);
-								
+
 								return TRUE;
 							} catch (Exception $e) {
 								echo 'Error: ' . $e->getMessage();
 								return FALSE;
 							}
 						}
-						
+
 						/**
 						 * Adde new Event to calendar json
 						 */
@@ -101,47 +101,47 @@
 							$newEvent -> end_time = $endTime;
 							$newEvent -> location = $location;
 							$newEvent -> img_url = $imgURL;
-							
+
 							$newEventJson = json_encode($newEvent);
 							$newEventJson = json_decode($newEventJson, true);
-							
+
 							switch ($day) {
 								case "Monday":
 									array_push($json['monday'], $newEventJson);
 									break;
-									
+
 								case "Tuesday":
 									array_push($json['tuesday'], $newEventJson);
 									break;
-								
+
 								case "Wednesday":
 									array_push($json['wednesday'], $newEventJson);
 									break;
-								
+
 								case "Thursday":
 									array_push($json['thursday'], $newEventJson);
 									break;
-								
+
 								case "Friday":
 									array_push($json['friday'], $newEventJson);
 									break;
-									
+
 								default:
 									echo "Not Valid day";
 							}
 						}
-						
+
 						/**
-						 * Redirect to calendar page if event add was successful 
+						 * Redirect to calendar page if event add was successful
 						 */
 						function redirect () {
 							header('Location: http://localhost/.www/calendar.php', true, 301);
 							die();
 						}
-					
+
 						# Handle POST request
 						function postHandle() {
-							if($_SERVER['REQUEST_METHOD'] == 'POST') {								
+							if($_SERVER['REQUEST_METHOD'] == 'POST') {
 								$eventName = $_POST['eventname'];
 								$startTime = $_POST['starttime'];
 								$endTime   = $_POST['endtime'];
@@ -149,15 +149,15 @@
 								$day 	   = $_POST['day'];
 								$imgURL	   = $_POST['img_url'];
 								$btn	   = $_POST['submit'];
-								
+
 								# Clearing calendar events
 								if ($btn === "Clear") {
 									$jsonString = json_decode('{"monday": [], "tuesday": [],
 																"wednesday": [], "thursday": [],
 																"friday": []}');
-									
+
 									$status = writeJSonToFile("json/calendar.txt", $jsonString);
-									
+
 									if ($status) {
 										$clearMsg  = "<p style='color: green;'>";
 										$clearMsg .= "<img src='imgs/check_mark.png'
@@ -165,7 +165,7 @@
 														   style='width: 1.1em; height: 1.1em;'> ";
 										$clearMsg .= "<span style='vertical-align: top'>Calendar events cleared.</span>";
 										$clearMsg .= "</p>";
-									
+
 										echo $clearMsg;
 									} else {
 										$clearMsg  = "<p style='color: red;'>";
@@ -174,7 +174,7 @@
 														   style='width: 1.1em; height: 1.1em;'> ";
 										$clearMsg .= "<span style='vertical-align: top'>Unable to clear events.</span>";
 										$clearMsg .= "</p>";
-										
+
 										echo $clearMsg;
 									}
 								} else {
@@ -182,9 +182,9 @@
 										if (validate($location)) {
 											$eventJSonFilePath = "json/calendar.txt";
 											$eventJson = readJSonFile($eventJSonFilePath);
-											
+
 											if ($eventJson != null) {
-												addEvent($eventJson, $eventName, $startTime, $endTime, $location, $day, $imgURL);																		
+												addEvent($eventJson, $eventName, $startTime, $endTime, $location, $day, $imgURL);
 												writeJSonToFile($eventJSonFilePath, $eventJson);
 												redirect();
 											}
@@ -193,11 +193,11 @@
 										}
 									} else {
 										echo "<span style='color: red;'>Event Name must be alpha-numeric!!!</span><br>";
-									}	
+									}
 								}
 							}
 						}
-						
+
 						postHandle();
 					?>
 					<!-- <h2 id="heading">Calendar Input</h2> -->
@@ -219,16 +219,16 @@
 											<label>Start Time:</label>
 										</div>
 										<div class="input_ele">
-											<input type="time" name="starttime" required>
+											<input type="time" name="starttime">
 										</div>
 									</div>
 
 									<div id="dt_id">
 										<div class="label_ele">
 											<label>End Time:</label>
-										</div> 
+										</div>
 										<div class="input_ele">
-											<input type="time" name="endtime" required>
+											<input type="time" name="endtime">
 										</div>
 									</div>
 
@@ -240,7 +240,7 @@
 											<input id="location_in" type="text" name="location">
 										</div>
 									</div>
-									
+
 									<div id="img_id">
 										<div class="label_ele">
 											<label>Image url:</label>
@@ -270,7 +270,7 @@
 										<input type="submit" name="submit" value="Submit">
 										<input type="submit" name="submit" value="Clear">
 									</div>
-								</div>		
+								</div>
 							</form>
 						</div>
 					</div>
