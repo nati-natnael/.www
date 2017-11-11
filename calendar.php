@@ -16,13 +16,13 @@
 				<a href="#"><div id="nav_cal_id">MyCalendar</div></a>
 				<a href="form.php"><div id="nav_form_id">Form Input</div></a>
 			</nav>
-			
-			<div id="content_wrapper">				
+
+			<div id="content_wrapper">
 				<!-- Page Content -->
 				<div id="main_content">
 					<!-- Heading -->
 					<!-- <h2 id="heading">My Calendar</h2> -->
-					
+
 					<div id="search_wrapper">
 						<div id="search">
 							<input id="search_val" type="text" name="search">
@@ -42,15 +42,15 @@
 								function capitalizeWords($phrase) {
 									$formatted = "";
 									$words = explode(' ', $phrase);
-									
+
 									foreach ($words as $word) {
-										$tWord = trim($word, ' '); 
+										$tWord = trim($word, ' ');
 										$formatted .= " " . ucfirst($tWord);
 									}
-									
+
 									return $formatted;
 								}
-								
+
 								/**
 								 * Get time from div and compare.
 								 *
@@ -65,14 +65,14 @@
 								 */
 								function timeComparator ($div1, $div2) {
 									$pat = '/<span class=\'s_time\'>(.*?)<\/span>/';
-									
+
 									$match1 = preg_match($pat, $div1, $matches1);
 									$match2 = preg_match($pat, $div2, $matches2);
-									
+
 									if ($match1 && $match2) {
 										$time1 = strtotime($matches1[1]);
 										$time2 = strtotime($matches2[1]);
-										
+
 										if ($time1 === $time2) {
 											return 0;
 										} else {
@@ -82,7 +82,7 @@
 										return 0;
 									}
 								}
-								
+
 								/**
 								 * Read json string from file
 								 * Note: file must only contain one json on a single line.
@@ -92,7 +92,7 @@
 								function readCalendarJson($filePath) {
 									try {
 										$jsonFile = fopen($filePath, "r") or die("Error on opening file");
-										
+
 										# Read Entire file
 										$size = filesize($filePath);
 										if ($size > 0) {
@@ -100,19 +100,19 @@
 										} else {
 											# dummy json to reduce too many checks when file is empty
 											$jsonString = '{"monday": [], "tuesday": [], "wednesday": [],
-															"thursday": [], "friday": []}';																				
+															"thursday": [], "friday": []}';
 										}
 										fclose($jsonFile);
-										
+
 										$jsonObject = json_decode($jsonString, true);
-										
+
 										return $jsonObject;
 									} catch (Exception $e) {
 										echo 'Error: ' . $e->getMessage();
 										return null;
 									}
 								}
-								
+
 								/**
 								 * Created div for a single event
 								 *
@@ -121,32 +121,32 @@
 								function singleEvent($eName, $sTime, $eTime, $loc, $imgURL) {
 									$htmlElement  = "<div class='cell_content'";
 									$htmlElement .= "onmouseover='moShowImage(event)'";
-									$htmlElement .= "onmouseout='mtShowImage(event)'";	
+									$htmlElement .= "onmouseout='mtShowImage(event)'";
 									$htmlElement .= ">";
-									
-									$htmlElement .= "<span class='e_name'>" . capitalizeWords($eName) . "</span> <br>";									
+
+									$htmlElement .= "<span class='e_name'>" . capitalizeWords($eName) . "</span> <br>";
 									$htmlElement .= "<span class='location'>" . capitalizeWords($loc)   . "</span> <br>";
-									# Converting time 
+									# Converting time
 									$htmlElement .= "<span class='s_time'>";
 									$htmlElement .= $sTime;
 									$htmlElement .= "</span>";
-									
+
 									# Time separator
 									$htmlElement .= " - ";
-									
+
 									$htmlElement .= "<span class='e_time'>";
 									$htmlElement .= $eTime;
 									$htmlElement .= "</span>";
-																		
+
 									$htmlElement .= "<span class='hidden' style='display: none;'";
 									$htmlElement .= "data-url='" . $imgURL . "'";
 									$htmlElement .= "></span>";
-									
+
 									$htmlElement .= "</div>";
-									
+
 									return $htmlElement;
 								}
-								
+
 								/**
 								 * Get all events under $day and sort using
 								 * $comparator function.
@@ -155,57 +155,57 @@
 								 */
 								function getDayEvents($calJson, $day, $comparator) {
 									$dayEventArray = $calJson[$day];
-									
+
 									# returned value
-									$eventDivArray = [];
-									
+									$eventDivArray = array();
+
 									if (!empty($dayEventArray)) {
 										foreach ($dayEventArray as $dayEvent) {
 											$eName    = $dayEvent['event_name'];
 											$sTime    = $dayEvent['start_time'];
 											$eTime    = $dayEvent['end_time'];
 											$loc      = $dayEvent['location'];
-											$imgURL   = $dayEvent['img_url'];										
-										
+											$imgURL   = $dayEvent['img_url'];
+
 											$eventDiv = singleEvent($eName, $sTime, $eTime, $loc, $imgURL);
 											array_push($eventDivArray, $eventDiv);
 										}
-										
+
 										usort($eventDivArray, $comparator);
 									}
-																		
+
 									return $eventDivArray;
 								}
-								
+
 								/**
 								 * Creates table construct in table format
 								 */
 								function createCalendar($calJson) {
 									$eventsPresent = FALSE;
-									$dayNames = ['monday', 'tuesday', 'wednesday',
-												 'thursday', 'friday'];
-									
+									$dayNames = array('monday', 'tuesday', 'wednesday',
+												 'thursday', 'friday');
+
 									# get all days with events
 									$daysPerWeek = 5;
 									$maxRow = 0;
-									$days = [];
+									$days = array();
 									foreach ($dayNames as $day) {
 										$events = getDayEvents($calJson, $day, "timeComparator");
-										
+
 										if (!empty($events)) {
 											# Getting the maximum number of events per day
 											$maxRow = count($events) > $maxRow ? count($events) : $maxRow;
 											$eventsPresent = TRUE;
 										}
-										
+
 										array_push($days, $events);
 									}
-									
+
 									if (!$eventsPresent) {
 										echo "<p style='color: red;'>Calendar has no events.
 											  Please use Input page to enter events.</p>";
-									} else {										
-										# Table headers									
+									} else {
+										# Table headers
 										$table  = "<table>";
 										$table .= "<thead>";
 										$table .= "<tr>";
@@ -215,15 +215,15 @@
 										$table .= "<th>Thursday</th>";
 										$table .= "<th>Friday</th>";
 										$table .= "</tr>";
-										$table .= "</thead>";										
-										
+										$table .= "</thead>";
+
 										# Add table data
 										$table .= "<tbody>";
 										for ($i = 0; $i < $maxRow; $i++) {
 											$table .= "<tr>";
 											for ($j = 0; $j < $daysPerWeek; $j++) {
 												$size = count($days[$j]);
-												
+
 												$table .= "<td>";
 												if ($i < $size) {
 													$table .= $days[$j][$i];
@@ -233,13 +233,13 @@
 											$table .= "</tr>";
 										}
 										$table .= "</tbody>";
-										
+
 										$table .= "</table>";
-										
+
 										echo $table;
 									}
 								}
-																
+
 								$calJson = readCalendarJson("json/calendar.txt");
 								createCalendar($calJson);
 							?>
@@ -248,72 +248,6 @@
 
 					<!-- Map -->
 					<div id="map_wrapper">
-						<!--<div id="map_form">
-							<form>
-								<!-- Search Radius
-								<div class="map_input" id="radius">
-									<input id="radius_val" 
-										   type="number" 
-										   name="radius"
-										   placeholder="Radius">
-									<input type="button" 
-									       name="findRestaurants" 
-									       value="Find Nearby Restaurants"
-									       onclick="searchRestaurants()">
-								</div>
-								<!-- Destinations
-								<div class="map_input" id="destination">
-									<input id="address" 
-										   type="text" 
-										   name="address"
-										   placeholder="Type address here">
-									<input type="button" 
-										   name="address_button" 
-										   value="Get Direction" 
-										   onclick="onClickSearchDirection()">
-								</div>
-								<!-- Travel Method
-								<div class="map_input" id="trav_mode">
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="DRIVING" 
-											   onclick="onClickSearchDirection()"
-											   checked>
-										<span>Driving</span> 
-									</div>
-
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="WALKING"
-											   onclick="onClickSearchDirection()">
-										<span>Walking</span>
-									</div>
-
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="TRANSIT"
-											   onclick="onClickSearchDirection()">
-										<span>Transit</span> 
-									</div>
-
-									<div class="map_radio_input">
-										<input class="trav_mode" 
-											   type="radio" 
-											   name="trav_mode" 
-											   value="BICYCLING"
-											   onclick="onClickSearchDirection()">
-										<span>Bicycling</span> 
-									</div>
-								</div>
-							</form>
-						</div>-->
-												
 						<div id="map_win">
 							<div id="map_inner_win">
 								<div id="map">
