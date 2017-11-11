@@ -20,19 +20,40 @@
 				<div id="main_content">
 					<?php
 						/**
-						 * Validate posted values
+						 * Builds an error message
+						 *
+						 * :param $errMsg: description of error 
+						 */
+						function errMsg($errMsg) {
+							$msg  = "<br><span style='color: red;'>";
+							$msg .= "<img src='imgs/err_img.png'
+											   alt='Check Mark Image'
+											   style='width: 1.1em; height: 1.1em;'> ";
+							$msg .= "<span style='vertical-align: top'>";
+							$msg .= $errMsg;
+							$msg .= "</span>";
+							$msg .= "</span>";
+							
+							return $msg;
+						}
+						/**
+						 * Validate input string
 						 *
 						 * All Values need to be alpha numeric
 						 */
 						function validate($string) {
 							$pattern = "/^[a-z0-9]+$/";
+							
+							if (empty($string)) {
+								return false;
+							}
+							
 							$lowerString = strtolower($string);
-
 							$pieces = explode(" ", $lowerString);
 
 							foreach ($pieces as $piece) {
 								$match = preg_match($pattern, $piece);
-								//echo "String: $piece | Match: $match <br>";
+								# echo "String: $piece | Match: $match <br>";
 
 								# If any string piece doesn't match stop
 								if (!$match) {
@@ -51,7 +72,7 @@
 						 */
 						function readJSonFile ($filePath) {
 							try {
-								$jsonFile = fopen($filePath, "r") or die("Error on opening file");
+								$jsonFile = fopen($filePath, "r");
 
 								# Read Entire file
 								$size = filesize($filePath);
@@ -79,7 +100,7 @@
 						 */
 						function writeJSonToFile ($filePath, $json) {
 							try {
-								$file = fopen($filePath, "w") or die("Error on opening file");
+								$file = fopen($filePath, "w");
 								$encodedJson = json_encode($json);
 								fwrite($file, $encodedJson);
 								fclose($file);
@@ -163,36 +184,74 @@
 										$clearMsg .= "<img src='imgs/check_mark.png'
 														   alt='Check Mark Image'
 														   style='width: 1.1em; height: 1.1em;'> ";
-										$clearMsg .= "<span style='vertical-align: top'>Calendar events cleared.</span>";
+										$clearMsg .= "<span style='vertical-align: top'>";
+										$clearMsg .= "Calendar events cleared.";
+										$clearMsg .= "</span>";
 										$clearMsg .= "</p>";
-
+										
 										echo $clearMsg;
 									} else {
-										$clearMsg  = "<p style='color: red;'>";
-										$clearMsg .= "<img src='imgs/err_img.png'
-														   alt='Check Mark Image'
-														   style='width: 1.1em; height: 1.1em;'> ";
-										$clearMsg .= "<span style='vertical-align: top'>Unable to clear events.</span>";
-										$clearMsg .= "</p>";
-
-										echo $clearMsg;
+										echo errMsg("Unable to clear events"); 
 									}
 								} else {
-									if (validate($eventName)) {
-										if (validate($location)) {
-											$eventJSonFilePath = "json/calendar.txt";
-											$eventJson = readJSonFile($eventJSonFilePath);
-
-											if ($eventJson != null) {
-												addEvent($eventJson, $eventName, $startTime, $endTime, $location, $day, $imgURL);
-												writeJSonToFile($eventJSonFilePath, $eventJson);
+									$validationPassed = TRUE;
+									
+									$errMsgs = "";
+									if (!validate($eventName)) {
+										$errMsgs .= errMsg("Event Name must be alpha-numeric");
+										$validationPassed = FALSE;
+									} 
+									
+									if (empty($startTime)) {
+										$errMsgs .= errMsg("Start Time cannot be empty");
+										$validationPassed = FALSE;
+									}
+									
+									if (empty($endTime)) {
+										$errMsgs .= errMsg("End time cannot be empty");
+										$validationPassed = FALSE;
+									}
+									
+									if (!validate($location)) {
+										$errMsgs .= errMsg("Location must be alpha-numeric");
+										$validationPassed = FALSE;
+									}
+									
+									if (!validate($day)) {
+										$errMsgs .= errMsg("Please select day");
+										$validationPassed = FALSE;
+									}
+									
+									if ($validationPassed) {
+										$eventJSonFilePath = "json/calendar.txt";
+										$eventJson = readJSonFile($eventJSonFilePath);
+	
+										if ($eventJson != null) {
+											addEvent($eventJson, $eventName, $startTime,
+													 $endTime, $location, $day, $imgURL);
+											$status = writeJSonToFile($eventJSonFilePath, $eventJson);
+											
+											if ($status) {
 												redirect();
+											} else {
+												echo errMsg("Unable to update Calendar");
 											}
 										} else {
-											echo "<span style='color: red;'>Location must be alpha-numeric!!!</span><br>";
+											echo errMsg("Error Reading File");
 										}
 									} else {
-										echo "<span style='color: red;'>Event Name must be alpha-numeric!!!</span><br>";
+										$errDiv  = "<div id='form_err'>";
+										$errDiv .= "<div id='form_err_header'>";
+										$errDiv .= "<span style='font-size: 1.5em;'>Error</span>";
+										$errDiv .= "<input id='form_err_input'
+														   type='button'
+														   value='X'
+														   onclick='remove_error()'>";
+										$errDiv .= "</div>";
+										$errDiv .= $errMsgs;
+										$errDiv .= "</div>";
+										
+										echo $errDiv;
 									}
 								}
 							}

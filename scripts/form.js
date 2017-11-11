@@ -35,5 +35,5 @@ function form_verify () {
 }
 
 function remove_error () {
-	$('error_dialog').style.display = 'none';
+	$('form_err').style.display = 'none';
 }

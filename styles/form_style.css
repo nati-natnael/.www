@@ -9,7 +9,6 @@
 
 #f_elements {
 	background: lightgray;
-	font-family: Courier;
 	padding: 20px;
 }
 
@@ -95,6 +94,22 @@
 	margin: auto auto;
 	box-shadow: 0 4px 23px 5px rgba(0, 0, 0, 0.2), 
 				0 2px 6px rgba(0,0,0,0.15);
+}
+
+#form_err {
+	background: lightgray;
+	padding: 0.5em;
+	margin-bottom: 1em;
+	font-family: Courier;
+}
+
+#form_err_header {
+	background: #afafaf;
+	padding: 1em;
+}
+
+#form_err_input {
+	float: right;
 }
 
 #error_img {

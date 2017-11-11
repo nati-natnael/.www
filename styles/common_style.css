@@ -1,7 +1,7 @@
 body {
 	text-align: center;
 	background: #efefef;
-	font-family: Verdana,sans-serif;
+	font-family: Courier,Verdana,sans-serif;
 }
 
 a {
@@ -84,14 +84,14 @@ th {
 }
 
 #nav_cal_id {
-	padding: 15px 10px;
+	padding: 10px 10px;
 	display: inline-block;
 	vertical-align: top;
 }
 
 #nav_form_id {
-	padding: 15px 10px;
-    margin-left: -5px;
+	padding: 10px 10px;
+    margin-left: -9px;
 	display: inline-block;
 	vertical-align: top;
 }

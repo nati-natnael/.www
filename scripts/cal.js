@@ -546,7 +546,11 @@ function searchOnClick() {
 	if (serVal !== '') {
 		if (wordReg.test(serVal)) {
 			gm.getCurrentLocation(() => {
-				gm.getLocationOf(serVal, getLocOfCallback);
+				gm.getLocationOf(serVal, (res) => {
+					gm.searchPath(gm.curLocation,
+								  res.geometry.location,
+								  'DRIVING');
+				});
 			});
 		} else if (!isNaN(serVal)) {
 			var radius = parseInt(serVal);
