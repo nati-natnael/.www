@@ -1,8 +1,23 @@
 /* Search box */
+#search_button_wrapper {
+	display: inline-block;	
+}
+
 #search {
 	background: white;
 	border: 1px solid lightgray;
 	display: inline-block;	
+}
+
+#search_clear {
+	background: white;
+	color: lightgray;
+	display: none;
+	width: 1em;
+}
+
+#search_clear:active {
+	
 }
 
 #search input[type=button] {

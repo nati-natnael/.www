@@ -25,8 +25,8 @@
 
 					<div id="search_wrapper">
 						<div id="search">
-							<input id="search_val" type="text" name="search">
-							<input type="button" name="searchbtn" value="Search" onclick="searchOnClick()">
+							<input id="search_val" type="text" placeholder="Address or Radius">
+							<input type="button" value="Search" onclick="searchOnClick()">
 						</div>
 					</div>
 
