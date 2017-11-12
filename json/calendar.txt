@@ -1,1 +1,1 @@
-{"monday":[{"event_name":"5204","start_time":"02:20","end_time":"02:20","location":"Mecanical building UMN","img_url":""}],"tuesday":[{"event_name":"4131","start_time":"13:00","end_time":"14:15","location":"Fraser hall umn","img_url":"http:\/\/localhost\/.www\/img\/Fraser_Hall.jpg"}],"wednesday":[{"event_name":"4131","start_time":"13:00","end_time":"02:15","location":"Fraser hall umn","img_url":"http:\/\/localhost\/.www\/imgs\/Fraser_Hall.jpg"}],"thursday":[],"friday":[]}
+{"monday":[],"tuesday":[],"wednesday":[],"thursday":[],"friday":[]}

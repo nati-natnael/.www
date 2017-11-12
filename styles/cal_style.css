@@ -132,7 +132,6 @@ td span:first-of-type a {
 /* Map styling */
 #map_wrapper {
 	margin-top: 1em;
-	height: 100%;
 	border: 1px solid darkgray;
 }
 
@@ -190,10 +189,6 @@ td span:first-of-type a {
 .map_radio_input span {
 	width: 5em;
 	font-size: 0.9em;
-}
-
-.map_radio_input input {
-	cursor: pointer;
 }
 
 #map_win {
@@ -341,7 +336,7 @@ td span:first-of-type a {
 }
 
 .cell_content {
-	height: 100%;
+	display: inline-block;
 	padding: 1em;
 }
 

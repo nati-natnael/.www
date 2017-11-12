@@ -566,7 +566,7 @@ function searchOnClick() {
 // ----------------------------------------------------------
 // --- Mouse over callback function for table cells
 function loadImage (ele, srcURL) {	
-	var xmlHttp = new XMLHttpRequest();
+	var xmlHttp = new XMLHttpRequest();	
 	xmlHttp.open("GET", srcURL, true);
 	xmlHttp.responseType = 'blob';
 	xmlHttp.send();
@@ -580,6 +580,8 @@ function loadImage (ele, srcURL) {
 			newImg.style.height = '100px';
 			newImg.src = window.URL.createObjectURL(xmlHttp.response);
 			ele.appendChild(newImg);
+		} else {
+			console.log(status);
 		}
 	};
 }
