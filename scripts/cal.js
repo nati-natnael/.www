@@ -233,7 +233,7 @@ function hideInstructions () {
 }
 
 // Google Map class and helpers
-let google_that;
+//let google_that;
 
 // Map class
 class GoogleMaps {
@@ -269,7 +269,7 @@ class GoogleMaps {
 
 	// Search for places by type
 	searchPlaceType (place_type, radius) {
-		google_that = this;
+		//google_that = this;
 		this.clearMarkers();
 		
 		var request = {
@@ -295,7 +295,7 @@ class GoogleMaps {
 	 * instruction html list.
 	 */
 	searchPath (start, end, trans_mode) {
-		google_that = this;
+		//google_that = this;
 
 		this.clearPaths();
 		this.clearMarkers();
@@ -423,7 +423,7 @@ class GoogleMaps {
 
 	// Get location (lat, lng) by name
 	getLocationOf (searchName, callback) {
-		google_that = this;
+		//google_that = this;
 		var geocoder = new google.maps.Geocoder();
 
 		var request = {
@@ -480,7 +480,7 @@ class GoogleMaps {
 	 */
 	markMapLocation (geoLoc, animation, content) {
 		var mark = new google.maps.Marker({
-					map: google_that.map,
+					map: this.map,
 					animation: animation,
 					position: geoLoc.geometry.location,
 				});
@@ -489,19 +489,19 @@ class GoogleMaps {
 		google.maps.event.addListener(mark, 'click', () => {
 			var cont = '<b>'+content+'</b>' + '<br>' + geoLoc.formatted_address;
 			this.info_view.setContent(cont);
-			this.info_view.open(google_that.map, this);
+			this.info_view.open(this.map, this);
 		});
 
-		google_that.eventMarkersArray.push(mark);
+		this.eventMarkersArray.push(mark);
 
 		// Center Map
-		centerMap(google_that);
+		centerMap(this);
 	}
 
 	// Put markers on map
 	markMapPlace (place, animation) {
 		var mark = new google.maps.Marker({
-					map: google_that.map,
+					map: this.map,
 					animation: animation,
 					position: place.geometry.location
 				});
@@ -510,7 +510,7 @@ class GoogleMaps {
 		google.maps.event.addListener(mark, 'click', () => {
 			var content = '<b>'+place.name+'</b>' + '<br>' + place.vicinity;
 			this.info_view.setContent(content);
-			this.info_view.open(google_that.map, this);
+			this.info_view.open(this.map, this);
 		});
 
 		this.placeMarkersArray.push(mark);
