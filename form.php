@@ -22,7 +22,7 @@
 						/**
 						 * Builds an error message
 						 *
-						 * :param $errMsg: description of error 
+						 * :param $errMsg: description of error
 						 */
 						function errMsg($errMsg) {
 							$msg  = "<br><span style='color: red;'>";
@@ -33,7 +33,7 @@
 							$msg .= $errMsg;
 							$msg .= "</span>";
 							$msg .= "</span>";
-							
+
 							return $msg;
 						}
 						/**
@@ -43,11 +43,11 @@
 						 */
 						function validate($string) {
 							$pattern = "/^[a-z0-9]+$/";
-							
+
 							if (empty($string)) {
 								return false;
 							}
-							
+
 							$lowerString = strtolower($string);
 							$pieces = explode(" ", $lowerString);
 
@@ -100,9 +100,9 @@
 						 */
 						function writeJSonToFile ($filePath, $json) {
 							try {
-								$file = fopen($filePath, "w");
+								$file = fopen($filePath, "w") or die("unable to open file");
 								$encodedJson = json_encode($json);
-								fwrite($file, $encodedJson);
+								$read = fwrite($file, $encodedJson);
 								fclose($file);
 
 								return TRUE;
@@ -156,7 +156,7 @@
 						 * Redirect to calendar page if event add was successful
 						 */
 						function redirect () {
-							header('Location: http://localhost/.www/calendar.php', true, 301);
+							header('Location: calendar.php', true, 301);
 							die();
 						}
 
@@ -188,51 +188,52 @@
 										$clearMsg .= "Calendar events cleared.";
 										$clearMsg .= "</span>";
 										$clearMsg .= "</p>";
-										
+
 										echo $clearMsg;
 									} else {
-										echo errMsg("Unable to clear events"); 
+										echo errMsg("Unable to clear events");
 									}
 								} else {
 									$validationPassed = TRUE;
-									
+
 									$errMsgs = "";
 									if (!validate($eventName)) {
 										$errMsgs .= errMsg("Event Name must be alpha-numeric");
 										$validationPassed = FALSE;
-									} 
-									
+									}
+
 									if (empty($startTime)) {
 										$errMsgs .= errMsg("Start Time cannot be empty");
 										$validationPassed = FALSE;
 									}
-									
+
 									if (empty($endTime)) {
 										$errMsgs .= errMsg("End time cannot be empty");
 										$validationPassed = FALSE;
 									}
-									
+
 									if (!validate($location)) {
 										$errMsgs .= errMsg("Location must be alpha-numeric");
 										$validationPassed = FALSE;
 									}
-									
+
 									if (!validate($day)) {
 										$errMsgs .= errMsg("Please select day");
 										$validationPassed = FALSE;
 									}
-									
+
 									if ($validationPassed) {
 										$eventJSonFilePath = "json/calendar.txt";
 										$eventJson = readJSonFile($eventJSonFilePath);
-	
+
 										if ($eventJson != null) {
 											addEvent($eventJson, $eventName, $startTime,
 													 $endTime, $location, $day, $imgURL);
+
 											$status = writeJSonToFile($eventJSonFilePath, $eventJson);
-											
+
 											if ($status) {
-												redirect();
+												// redirect();
 											} else {
 												echo errMsg("Unable to update Calendar");
 											}
@@ -250,7 +251,7 @@
 										$errDiv .= "</div>";
 										$errDiv .= $errMsgs;
 										$errDiv .= "</div>";
-										
+
 										echo $errDiv;
 									}
 								}
