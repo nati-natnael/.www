@@ -233,7 +233,7 @@
 											$status = writeJSonToFile($eventJSonFilePath, $eventJson);
 
 											if ($status) {
-												// redirect();
+												redirect();
 											} else {
 												echo errMsg("Unable to update Calendar");
 											}
