@@ -30,7 +30,7 @@
 		/**
 		 * executes general mysql query
 		 */
-		function selectQuery ($queryString) {
+		function execQuery ($queryString) {
 			mysqli_query($connection, $query);
 		}
 
@@ -45,7 +45,7 @@
 		 * :param $acc_pass:
 		 */
 		function update($acc_name, $acc_login, $acc_pass) {
-
+			echo "not developed yet";
 		}
 
 		function insert($acc_name, $acc_login, $acc_pass) {
@@ -56,7 +56,7 @@
 		}
 
 		function delete ($acc_name, $acc_login, $acc_pass) {
-
+			echo "not developed yet";
 		}
 	}
 ?>
