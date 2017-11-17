@@ -20,6 +20,7 @@
 
 			if (mysqli_connect_errno()) {
 				// connection failed
+				echo mysqli_connect_error();
 				return FALSE;
 			} else {
 				// connection successful
