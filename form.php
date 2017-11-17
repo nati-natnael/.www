@@ -19,99 +19,10 @@
 				<!-- Heading -->
 				<div id="main_content">
 					<?php
-						/**
-						 * Builds an error message
-						 *
-						 * :param $errMsg: description of error
-						 */
-						function errMsg($errMsg) {
-							$msg  = "<br><span style='color: red;'>";
-							$msg .= "<img src='imgs/err_img.png'
-											   alt='Check Mark Image'
-											   style='width: 1.1em; height: 1.1em;'> ";
-							$msg .= "<span style='vertical-align: top'>";
-							$msg .= $errMsg;
-							$msg .= "</span>";
-							$msg .= "</span>";
-
-							return $msg;
-						}
-						/**
-						 * Validate input string
-						 *
-						 * All Values need to be alpha numeric
-						 */
-						function validate($string) {
-							$pattern = "/^[a-z0-9]+$/";
-
-							if (empty($string)) {
-								return false;
-							}
-
-							$lowerString = strtolower($string);
-							$pieces = explode(" ", $lowerString);
-
-							foreach ($pieces as $piece) {
-								$match = preg_match($pattern, $piece);
-								# echo "String: $piece | Match: $match <br>";
-
-								# If any string piece doesn't match stop
-								if (!$match) {
-									return false;
-								}
-							}
-
-							return $match;
-						}
-
-						/**
-						 * Reads file containing json object.
-						 * file must only contain one JSon object.
-						 *
-						 * returns json object
-						 */
-						function readJSonFile ($filePath) {
-							try {
-								$jsonFile = fopen($filePath, "r");
-
-								# Read Entire file
-								$size = filesize($filePath);
-								if ($size > 0) {
-									$jsonString = fread($jsonFile, $size);
-								} else {
-									# Create empty json if file is empty
-									$jsonString = '{"monday": [], "tuesday": [],
-												    "wednesday": [], "thursday": [], "friday": []}';
-								}
-
-								fclose($jsonFile);
-
-								$jsonObject = json_decode($jsonString, true);
-
-								return $jsonObject;
-							} catch (Exception $e) {
-								echo 'Error: ' . $e->getMessage();
-								return null;
-							}
-						}
-
-						/**
-						 * Write json to file
-						 */
-						function writeJSonToFile ($filePath, $json) {
-							try {
-								$file = fopen($filePath, "w") or die("unable to open file");
-								$encodedJson = json_encode($json);
-								$read = fwrite($file, $encodedJson);
-								fclose($file);
-
-								return TRUE;
-							} catch (Exception $e) {
-								echo 'Error: ' . $e->getMessage();
-								return FALSE;
-							}
-						}
-
+						include "util/validate.php";
+						include "util/io.php";
+						include "util/err_handlers.php";
+																		
 						/**
 						 * Adde new Event to calendar json
 						 */

@@ -11,12 +11,12 @@
 		 * :param $userName:
 		 * :param $password:
 		 */
-		function connect ($serverName, $port, $db_name, $userName, $password) {
+		function connect ($serverName, $port, $dbName, $userName, $password) {
 			$connection = mysqli_connect($serverName,
-																	 $userName,
-																	 $password,
-																	 $dbName,
-																	 $port);
+										 $userName,
+										 $password,
+										 $dbName,
+										 $port);
 
 			if (mysqli_connect_errno()) {
 				// connection failed
@@ -46,6 +46,20 @@
 		 */
 		function update($acc_name, $acc_login, $acc_pass) {
 			echo "not developed yet";
+		}
+		
+		function login($acc_login, $acc_pass) {
+			$query  = "SELECT * ";
+			$query .= "FROM tbl_accounts ";
+			$query .= "WHERE acc_login = '$acc_login' AND acc_pass = '$acc_pass'";
+			
+			$results = mysqli_query($connection, $query);
+			
+			if ($results->num_rows > 0) {
+				return TRUE;
+			} else {
+				return FALSE;
+			}
 		}
 
 		function insert($acc_name, $acc_login, $acc_pass) {

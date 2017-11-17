@@ -1,0 +1,53 @@
+#login_elements {
+    background: lightgray;
+    padding: 1em;
+    display: inline-block;    
+}
+
+.label_ele {
+    width: 160px;
+    padding: 2px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.input_ele {
+    width: 200px;
+    padding: 2px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#password {
+    margin-top: 0.5em;
+}
+
+#s_id {
+    margin-top: 1em;
+}
+
+#s_id input {
+    padding: 0.1em 2em;
+    font-size: 1.5em;
+}
+
+#main_content {
+    /*margin-top: 10em;*/
+}
+
+#form_err {
+    background: lightgray;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    font-family: Courier;
+    text-align: left;
+}
+
+#form_err_header {
+    background: #afafaf;
+    padding: 1em;
+}
+
+#form_err_input {
+    float: right;
+}
