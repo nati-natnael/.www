@@ -14,37 +14,40 @@
                 include 'util/db/database.php';
                 include 'util/validate.php';
                 include 'util/err_handlers.php';
-                
+
                 function handle_login() {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $userName = $_POST['username'];
                         $password = $_POST['password'];
-                        
+
                         $valid = TRUE;
                         $errMsgs = "";
-                        if (!validate($userName)) {
-                            $errMsgs .= errMsg("User Not Found");
-                            $valid = FALSE;
-                        }
-                        
-                        if (!validate($password)) {
-                            $errMsgs .= errMsg("invalid Password");
-                            $valid = FALSE;
-                        }
-                        
+                        // if (!validate($userName)) {
+                        //     $errMsgs .= errMsg("User Not Found");
+                        //     $valid = FALSE;
+                        // }
+                        //
+                        // if (!validate($password)) {
+                        //     $errMsgs .= errMsg("invalid Password");
+                        //     $valid = FALSE;
+                        // }
+
                         if ($valid) {
                             global $db_servername;
                             global $db_port;
                             global $db_name;
                             global $db_username;
                             global $db_password;
-                            
-                            $db = new db();
-                            $status = $db->connect($db_servername,
+
+                            $database = new DataBase();
+                            var_dump($database);
+                            $status = $database->connect($db_servername,
                                                    $db_port,
                                                    $db_name,
                                                    $db_username,
                                                    $db_password);
+
+                            echo "status";
                             if ($status) {
                                 if (login($userName, $password)) {
                                     // redirect to calendar page
@@ -61,7 +64,7 @@
                                     $errDiv .= "</div>";
                                     $errDiv .= errMsg("User not Found");
                                     $errDiv .= "</div>";
-            
+
                                     echo $errDiv;
                                 }
                             } else {
@@ -78,15 +81,15 @@
                             $errDiv .= "</div>";
                             $errDiv .= $errMsgs;
                             $errDiv .= "</div>";
-    
+
                             echo $errDiv;
                         }
-                    }  
+                    }
                 }
-                
+
                 handle_login();
-            ?>  
-            
+            ?>
+
             <form method="post" action="">
                 <div id="login_elements">
                     <h1>Login Page</h1>
