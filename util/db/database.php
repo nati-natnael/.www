@@ -85,7 +85,7 @@
 
 		function insert($acc_name, $acc_login, $acc_pass) {
 			$query  = "INSERT INTO tbl_accounts (acc_name, acc_login, acc_pass)";
-			$query .= "VALUES (" . $acc_name, $acc_login, sha1($acc_pass) . ");";
+			$query .= "VALUES ($acc_name, $acc_login," . sha1($acc_pass) . ");";
 
 			return $this->conn->query($query);
 		}
