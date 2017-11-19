@@ -1,1 +1,1 @@
-{"monday":[],"tuesday":[],"wednesday":[],"thursday":[],"friday":[]}
+{"monday":[],"tuesday":[],"wednesday":[],"thursday":[],"friday":[{"event_name":"Natnael","start_time":"00:00","end_time":"00:00","location":"Mecanical building UMN","img_url":""}]}

@@ -38,7 +38,7 @@
 				<div id="inner_nav">
 					<a href="#"><div id="nav_cal_id">MyCalendar</div></a>
 					<a href="form.php"><div id="nav_form_id">Form Input</div></a>
-					<div id="logout">Logout</div>
+					<a href="logout.php"><div id="logout">Logout</div></a>
 				</div>
 			</nav>
 

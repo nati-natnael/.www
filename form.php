@@ -10,7 +10,7 @@
 	<body>
 		<div id="main_wrapper">
 			<!-- Heading -->
-			<h2 id="heading">Event Form</h2>
+			<h2 id="heading">Calendar Input</h2>
 			
 			<!-- Check if logged in -->
 			<div id="wel_logout">
@@ -36,7 +36,7 @@
 				<div id="inner_nav">
 					<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
 					<a href="#"><div id="nav_form_id">Form Input</div></a>
-					<div id="logout">Logout</div>
+					<a href="logout.php"><div id="logout">Logout</div></a>
 				</div>
 			</nav>
 
@@ -45,7 +45,6 @@
 				<div id="main_content">					
 					<!-- Creating Event calendar -->
 					<?php
-						include "util/validate.php";
 						include "util/io.php";
 						include "util/err_handlers.php";
 																		

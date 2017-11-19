@@ -1,6 +1,6 @@
 <?php
 	class DataBase {
-		var $connection = NULL;
+		var $conn = NULL;
 
 		function __construct() {
 			echo "Object created";
@@ -9,26 +9,24 @@
 		/**
 		 * Connect to data base
 		 *
-		 * :param $conn_link: connection name
+		 * :param $host: connection name
 		 * :param $port: connection port
-		 * :param $db_name: name of the database
-		 * :param $userName:
-		 * :param $password:
+		 * :param $db: name of the database
+		 * :param $user: user name
+		 * :param $pass: user password
 		 */
-		function connect ($serverName, $port, $dbName, $userName, $password) {
-			$this->connection = mysqli_connect($serverName,
-										 $userName,
-										 $password,
-										 $dbName,
-										 $port);
+		function connect ($host, $port, $db, $user, $pass) {
+			echo "connect called";
+			
+			$this->conn = new mysqli($host, $user, $pass, $db, $port);
 
-			if (mysqli_connect_errno()) {
+			if ($this->conn->connect_errno) {
 				// connection failed
-				echo "failed";
-				var_dump(mysqli_connect_error());
+				echo "mysql connection failed";
+				var_dump($this->conn->connect_errno);
 				return FALSE;
 			} else {
-				echo "success";
+				echo "mysql connection successful";
 				// connection successful
 				return TRUE;
 			}
@@ -38,7 +36,13 @@
 		 * executes general mysql query
 		 */
 		function execQuery ($queryString) {
-			mysqli_query($this->connection, $query);
+			$result = $this->conn->query($query);
+			
+			if (!$result) {
+				echo "exec query failed";
+			}
+			
+			return $result;
 		}
 
 		/**
@@ -56,24 +60,34 @@
 		}
 
 		function login($acc_login, $acc_pass) {
+			echo "checking login ...";
+			
 			$query  = "SELECT * ";
 			$query .= "FROM tbl_accounts ";
-			$query .= "WHERE acc_login = '$acc_login' AND acc_pass = '$acc_pass'";
+			$query .= "WHERE acc_login = '$acc_login' ";
+			$query .= "AND acc_pass = '" . sha1($acc_pass) . "';";
 
-			$results = mysqli_query($this->connection, $query);
+			$results = $this->conn->query($query);
 
-			if ($results->num_rows > 0) {
-				return TRUE;
-			} else {
+			if (!$results) {
+				echo "login info not found";
 				return FALSE;
 			}
+			
+			if ($results->num_rows <= 0) {
+				echo "login info not found";
+				return FALSE;
+			}
+			
+			echo "login successful";
+			return TRUE;
 		}
 
 		function insert($acc_name, $acc_login, $acc_pass) {
 			$query  = "INSERT INTO tbl_accounts (acc_name, acc_login, acc_pass)";
 			$query .= "VALUES ($acc_name, $acc_login, $acc_pass);";
 
-			mysqli_query($this->connection, $query);
+			$this->conn->query($query);
 		}
 
 		function delete ($acc_name, $acc_login, $acc_pass) {
