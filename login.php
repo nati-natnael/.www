@@ -20,13 +20,13 @@
                 include 'util/err_handlers.php';
 
                 function handle_login() {
+                    $err = FALSE;
+                    $errMsgs = "";
+
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $userName = $_POST['username'];
                         $password = $_POST['password'];
 
-                        $err = FALSE;
-                        $errMsgs = "";
-                        
                         if (!validate($userName)) {
                             $errMsgs .= errMsg("User name should alpha-numeric");
                             $err = TRUE;
@@ -63,9 +63,9 @@
                                 $errMsgs .= errMsg("failed to connect");
                                 $err = TRUE;
                             }
-                        } 
+                        }
                     }
-                    
+
                     # if error at any point
                     if ($err) {
                         $errDiv  = "<div id='form_err'>";

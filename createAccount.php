@@ -9,6 +9,7 @@
 	</head>
     <body>
         <div id="main_content">
+            <h2>Create Account</h2>
             <?php
                 include 'util/db/params.php';
                 include 'util/db/database.php';
@@ -174,7 +175,7 @@
                             </div>
                         </div>
                         <div id="s_id">
-                            <input type="submit" name="submit" value="Create Account">
+                            <input type="submit" name="submit" value="create">
                         </div>
                     </div>
                 </div>
