@@ -63,7 +63,7 @@
 			$query  = "SELECT * ";
 			$query .= "FROM tbl_accounts ";
 			$query .= "WHERE acc_login = '$acc_login' ";
-			$query .= "AND acc_pass = '" . sha1($acc_pass) . "';";
+			$query .= "AND acc_password = '" . sha1($acc_pass) . "';";
 
 			$results = $this->conn->query($query);
 
@@ -84,8 +84,8 @@
 		}
 
 		function insert($acc_name, $acc_login, $acc_pass) {
-			$query  = "INSERT INTO tbl_accounts (acc_name, acc_login, acc_pass)";
-			$query .= "VALUES ($acc_name, $acc_login," . sha1($acc_pass) . ");";
+			$query  = "INSERT INTO tbl_accounts (acc_name, acc_login, acc_password) ";
+			$query .= "VALUES ('$acc_name', '$acc_login', '" . sha1($acc_pass) . "');";
 
 			return $this->conn->query($query);
 		}

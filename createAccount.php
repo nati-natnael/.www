@@ -14,36 +14,36 @@
                 include 'util/db/database.php';
                 include 'util/string_utils.php';
                 include 'util/err_handlers.php';
-                
+
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $adminUser = $_POST['adminuser'];
                     $adminPass = $_POST['adminpass'];
-                    
+
                     # New user
                     $firstName = $_POST['firstname'];
                     $lastName = $_POST['lastname'];
                     $userName = $_POST['username'];
                     $password = $_POST['password'];
-                    
+
                     # Error triggers
                     $err = FALSE;
                     $errMsgs = "";
-                    
+
                     if (!validate($adminUser)) {
                         $errMsgs .= errMsg("Admin user name should alpha-numeric");
                         $err = TRUE;
                     }
-                    
+
                     if (!validate($firstName)) {
                         $errMsgs .= errMsg("first name should alpha-numeric");
                         $err = TRUE;
                     }
-                    
+
                     if (!validate($lastName)) {
                         $errMsgs .= errMsg("Last name should alpha-numeric");
                         $valid = FALSE;
                     }
-                    
+
                     if (!validate($userName)) {
                         $errMsgs .= errMsg("User name should alpha-numeric");
                         $err = TRUE;
@@ -67,9 +67,18 @@
                             # check admin credentials
                             if ($database->login($adminUser, $adminPass)) {
                                 $name = $lastName . ", " . $firstName;
-                                
+
                                 if ($database->insert($name, $userName, $password)) {
-                                    echo "New User Added";
+                                  $addedMsg  = "<p style='color: green;'>";
+                                  $addedMsg .= "<img src='imgs/check_mark.png'
+                                             alt='Check Mark Image'
+                                             style='width: 1.1em; height: 1.1em;'> ";
+                                  $addedMsg .= "<span style='vertical-align: top'>";
+                                  $addedMsg .= "$firstName added.";
+                                  $addedMsg .= "</span>";
+                                  $addedMsg .= "</p>";
+
+                                  echo $addedMsg;
                                 } else {
                                     $errMsgs = errMsg("New user creation failed");
                                     $err = TRUE;
@@ -77,14 +86,14 @@
                             } else {
                                 $errMsgs = errMsg("Only Admin can add new user");
                                 $err = TRUE;
-                            }                            
+                            }
                         } else {
                             $errMsgs = errMsg("Mysql connection failed");
                             $err = TRUE;
                         }
-                        
+
                     }
-                    
+
                     # if error at any point
                     if ($err) {
                         $errDiv  = "<div id='form_err'>";
@@ -124,7 +133,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- New user -->
                     <div id="new_user">
                         <!-- First name -->
@@ -136,7 +145,7 @@
                                 <input id="firstname_in" type="text" name="firstname">
                             </div>
                         </div>
-                        
+
                         <!-- last name -->
                         <div id="lastname">
                             <div class="label_ele">
@@ -146,7 +155,7 @@
                                 <input id="lastname_in" type="text" name="lastname">
                             </div>
                         </div>
-                        
+
                         <!-- New Login credentials -->
                         <div id="username">
                             <div class="label_ele">
