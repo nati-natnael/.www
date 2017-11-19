@@ -24,14 +24,15 @@
                         $userName = $_POST['username'];
                         $password = $_POST['password'];
 
-                        $valid = TRUE;
+                        $err = FALSE;
                         $errMsgs = "";
+                        
                         if (!validate($userName)) {
-                            $errMsgs .= errMsg("User Not Found");
-                            $valid = FALSE;
+                            $errMsgs .= errMsg("User name should alpha-numeric");
+                            $err = TRUE;
                         }
 
-                        if ($valid) {
+                        if (!$err) {
                             global $db_servername;
                             global $db_port;
                             global $db_name;
@@ -55,36 +56,30 @@
                                     header('Location: calendar.php', true, 301);
                                     die();
                                 } else {
-                                    $errDiv  = "<div id='form_err'>";
-                                    $errDiv .= "<div id='form_err_header'>";
-                                    $errDiv .= "<span style='font-size: 1.5em;'>Error</span>";
-                                    $errDiv .= "<input id='form_err_input'
-                                                       type='button'
-                                                       value='X'
-                                                       onclick='remove_error()'>";
-                                    $errDiv .= "</div>";
-                                    $errDiv .= errMsg("Unrecognized credentials");
-                                    $errDiv .= "</div>";
-
-                                    echo $errDiv;
+                                    $errMsgs .= errMsg("User Not Found");
+                                    $err = TRUE;
                                 }
                             } else {
-                                echo "failed to connect";
+                                $errMsgs .= errMsg("failed to connect");
+                                $err = TRUE;
                             }
-                        } else {
-                            $errDiv  = "<div id='form_err'>";
-                            $errDiv .= "<div id='form_err_header'>";
-                            $errDiv .= "<span style='font-size: 1.5em;'>Error</span>";
-                            $errDiv .= "<input id='form_err_input'
-                                               type='button'
-                                               value='X'
-                                               onclick='remove_error()'>";
-                            $errDiv .= "</div>";
-                            $errDiv .= $errMsgs;
-                            $errDiv .= "</div>";
+                        } 
+                    }
+                    
+                    # if error at any point
+                    if ($err) {
+                        $errDiv  = "<div id='form_err'>";
+                        $errDiv .= "<div id='form_err_header'>";
+                        $errDiv .= "<span style='font-size: 1.5em;'>Error</span>";
+                        $errDiv .= "<input id='form_err_input'
+                                           type='button'
+                                           value='X'
+                                           onclick='remove_error()'>";
+                        $errDiv .= "</div>";
+                        $errDiv .= $errMsgs;
+                        $errDiv .= "</div>";
 
-                            echo $errDiv;
-                        }
+                        echo $errDiv;
                     }
                 }
 
