@@ -9,15 +9,41 @@
 	</head>
 	<body>
 		<div id="main_wrapper">
+			<!-- Heading -->
+			<h2 id="heading">Event Form</h2>
+			
+			<!-- Check if logged in -->
+			<div id="wel_logout">
+				<?php
+					include 'util/string_format.php';
+					session_start();
+					if (isset($_SESSION['username'])) {
+						// welcome message
+						$welcomeMsg  = '<div id="welcome">Welcome ';
+						$welcomeMsg .= capitalizeWords($_SESSION['username']);
+						$welcomeMsg .= '</div>';
+						
+						echo $welcomeMsg;
+					} else {
+						header('Location: login.php', true, 301);
+						die();
+					}
+				?>
+			</div>
+			
 			<!-- Nav -->
 			<nav id="main_nav">
-				<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
-				<a href="#"><div id="nav_form_id">Form Input</div></a>
+				<div id="inner_nav">
+					<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
+					<a href="#"><div id="nav_form_id">Form Input</div></a>
+					<div id="logout">Logout</div>
+				</div>
 			</nav>
 
 			<div id="content_wrapper">
 				<!-- Heading -->
-				<div id="main_content">
+				<div id="main_content">					
+					<!-- Creating Event calendar -->
 					<?php
 						include "util/validate.php";
 						include "util/io.php";

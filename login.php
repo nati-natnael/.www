@@ -19,37 +19,35 @@
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $userName = $_POST['username'];
                         $password = $_POST['password'];
-
+                        
                         $valid = TRUE;
                         $errMsgs = "";
-                        // if (!validate($userName)) {
-                        //     $errMsgs .= errMsg("User Not Found");
-                        //     $valid = FALSE;
-                        // }
-                        //
-                        // if (!validate($password)) {
-                        //     $errMsgs .= errMsg("invalid Password");
-                        //     $valid = FALSE;
-                        // }
+                        if (!validate($userName)) {
+                            $errMsgs .= errMsg("User Not Found");
+                            $valid = FALSE;
+                        }
 
                         if ($valid) {
-                            global $db_servername;
-                            global $db_port;
-                            global $db_name;
-                            global $db_username;
-                            global $db_password;
+                            $status = TRUE;
+                            //global $db_servername;
+                            //global $db_port;
+                            //global $db_name;
+                            //global $db_username;
+                            //global $db_password;
 
-                            $database = new DataBase();
-                            var_dump($database);
-                            $status = $database->connect($db_servername,
-                                                   $db_port,
-                                                   $db_name,
-                                                   $db_username,
-                                                   $db_password);
+                            //$database = new DataBase();
+                            //var_dump($database);
+                            //$status = $database->connect($db_servername,
+                            //                       $db_port,
+                            //                       $db_name,
+                            //                       $db_username,
+                            //                       $db_password);
 
-                            echo "status";
                             if ($status) {
-                                if (login($userName, $password)) {
+                                if (/*login($userName, $password)*/TRUE) {
+                                    // store name of current user
+                                    session_start();
+                                    $_SESSION['username'] = $userName;
                                     // redirect to calendar page
                                     header('Location: calendar.php', true, 301);
                                     die();

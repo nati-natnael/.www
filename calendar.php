@@ -11,46 +11,53 @@
 	</head>
 	<body>
 		<div id="main_wrapper">
+			<!-- Heading -->
+			<h2 id="heading">My Calendar</h2>
+			
+			<!-- Check if logged in -->
+			<div id="wel_logout">
+				<?php
+					include 'util/string_format.php';
+					session_start();
+					if (isset($_SESSION['username'])) {
+						// welcome message
+						$welcomeMsg  = '<div id="welcome">Welcome ';
+						$welcomeMsg .= capitalizeWords($_SESSION['username']);
+						$welcomeMsg .= '</div>';
+						
+						echo $welcomeMsg;
+					} else {
+						header('Location: login.php', true, 301);
+						die();
+					}
+				?>
+			</div>
+			
 			<!-- navigation -->
 			<nav id="main_nav">
-				<a href="#"><div id="nav_cal_id">MyCalendar</div></a>
-				<a href="form.php"><div id="nav_form_id">Form Input</div></a>
+				<div id="inner_nav">
+					<a href="#"><div id="nav_cal_id">MyCalendar</div></a>
+					<a href="form.php"><div id="nav_form_id">Form Input</div></a>
+					<div id="logout">Logout</div>
+				</div>
 			</nav>
 
 			<div id="content_wrapper">
 				<!-- Page Content -->
 				<div id="main_content">
-					<!-- Heading -->
-					<!-- <h2 id="heading">My Calendar</h2> -->
-
 					<div id="search_wrapper">
 						<div id="search">
 							<input id="search_val" type="text" placeholder="Address or Radius">
 							<input type="button" value="Search" onclick="searchOnClick()">
 						</div>
 					</div>
-
+					
 					<div id="table_wrapper">
 						<!-- Calendar Table -->
 						<div id="ct_div">
 							<?php
-								/**
-								 * Capitalize first letter of each word of a phrase.
-								 *
-								 * return: Capitalized phrase
-								 */
-								function capitalizeWords($phrase) {
-									$formatted = "";
-									$words = explode(' ', $phrase);
-
-									foreach ($words as $word) {
-										$tWord = trim($word, ' ');
-										$formatted .= " " . ucfirst($tWord);
-									}
-
-									return $formatted;
-								}
-
+								include 'util/io.php';
+								
 								/**
 								 * Get time from div and compare.
 								 *
@@ -80,36 +87,6 @@
 										}
 									} else {
 										return 0;
-									}
-								}
-
-								/**
-								 * Read json string from file
-								 * Note: file must only contain one json on a single line.
-								 *
-								 * return: json object
-								 */
-								function readCalendarJson($filePath) {
-									try {
-										$jsonFile = fopen($filePath, "r") or die("Error on opening file");
-
-										# Read Entire file
-										$size = filesize($filePath);
-										if ($size > 0) {
-											$jsonString = fread($jsonFile, $size);
-										} else {
-											# dummy json to reduce too many checks when file is empty
-											$jsonString = '{"monday": [], "tuesday": [], "wednesday": [],
-															"thursday": [], "friday": []}';
-										}
-										fclose($jsonFile);
-
-										$jsonObject = json_decode($jsonString, true);
-
-										return $jsonObject;
-									} catch (Exception $e) {
-										echo 'Error: ' . $e->getMessage();
-										return null;
 									}
 								}
 
@@ -240,7 +217,7 @@
 									}
 								}
 
-								$calJson = readCalendarJson("json/calendar.txt");
+								$calJson = readJSonFile("json/calendar.txt");
 								createCalendar($calJson);
 							?>
 						</div>
