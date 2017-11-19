@@ -10,6 +10,10 @@
     <body>
         <div id="main_content">
             <?php
+                error_reporting(E_ALL);
+                ini_set('display_errors', 1);
+                ini_set('display_startup_errors', 1);
+
                 include 'util/db/params.php';
                 include 'util/db/database.php';
                 include 'util/string_utils.php';
@@ -19,7 +23,7 @@
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $userName = $_POST['username'];
                         $password = $_POST['password'];
-                        
+
                         $valid = TRUE;
                         $errMsgs = "";
                         if (!validate($userName)) {
@@ -28,7 +32,6 @@
                         }
 
                         if ($valid) {
-                            $status = TRUE;
                             global $db_servername;
                             global $db_port;
                             global $db_name;
@@ -36,7 +39,6 @@
                             global $db_password;
 
                             $database = new DataBase();
-                            var_dump($database);
                             $status = $database->connect($db_servername,
                                                          $db_port,
                                                          $db_name,
@@ -44,10 +46,11 @@
                                                          $db_password);
 
                             if ($status) {
-                                if (login($userName, $password)) {
+                                $nameOfUser = $database->login($userName, $password);
+                                if ($nameOfUser != NULL) {
                                     // store name of current user
                                     session_start();
-                                    $_SESSION['username'] = $userName;
+                                    $_SESSION['username'] = $nameOfUser;
                                     // redirect to calendar page
                                     header('Location: calendar.php', true, 301);
                                     die();
@@ -60,7 +63,7 @@
                                                        value='X'
                                                        onclick='remove_error()'>";
                                     $errDiv .= "</div>";
-                                    $errDiv .= errMsg("User not Found");
+                                    $errDiv .= errMsg("Unrecognized credentials");
                                     $errDiv .= "</div>";
 
                                     echo $errDiv;

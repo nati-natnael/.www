@@ -1,9 +1,9 @@
 <?php
 	class DataBase {
-		var $conn = NULL;
+		private $conn;
 
 		function __construct() {
-			echo "Object created";
+			$conn = NULL;
 		}
 
 		/**
@@ -16,17 +16,12 @@
 		 * :param $pass: user password
 		 */
 		function connect ($host, $port, $db, $user, $pass) {
-			echo "connect called";
-			
 			$this->conn = new mysqli($host, $user, $pass, $db, $port);
 
 			if ($this->conn->connect_errno) {
 				// connection failed
-				echo "mysql connection failed";
-				var_dump($this->conn->connect_errno);
 				return FALSE;
 			} else {
-				echo "mysql connection successful";
 				// connection successful
 				return TRUE;
 			}
@@ -37,11 +32,11 @@
 		 */
 		function execQuery ($queryString) {
 			$result = $this->conn->query($query);
-			
+
 			if (!$result) {
-				echo "exec query failed";
+				return NULL;
 			}
-			
+
 			return $result;
 		}
 
@@ -59,9 +54,12 @@
 			echo "not developed yet";
 		}
 
+		/**
+		 * Check loginnn account table.
+		 * if user exist, return user's name.
+		 * else return NULL;
+		 */
 		function login($acc_login, $acc_pass) {
-			echo "checking login ...";
-			
 			$query  = "SELECT * ";
 			$query .= "FROM tbl_accounts ";
 			$query .= "WHERE acc_login = '$acc_login' ";
@@ -70,24 +68,26 @@
 			$results = $this->conn->query($query);
 
 			if (!$results) {
-				echo "login info not found";
-				return FALSE;
+				return NULL;
 			}
-			
+
 			if ($results->num_rows <= 0) {
-				echo "login info not found";
-				return FALSE;
+				return NULL;
 			}
-			
-			echo "login successful";
-			return TRUE;
+
+			$name = NULL;
+			while ($row = $results->fetch_assoc()) {
+				$name = $row['acc_name'];
+			}
+
+			return $name;
 		}
 
 		function insert($acc_name, $acc_login, $acc_pass) {
 			$query  = "INSERT INTO tbl_accounts (acc_name, acc_login, acc_pass)";
-			$query .= "VALUES ($acc_name, $acc_login, $acc_pass);";
+			$query .= "VALUES (" . $acc_name, $acc_login, sha1($acc_pass) . ");";
 
-			$this->conn->query($query);
+			return $this->conn->query($query);
 		}
 
 		function delete ($acc_name, $acc_login, $acc_pass) {
