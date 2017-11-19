@@ -15,7 +15,7 @@
 			<!-- Check if logged in -->
 			<div id="wel_logout">
 				<?php
-					include 'util/string_format.php';
+					include 'util/string_utils.php';
 					session_start();
 					if (isset($_SESSION['username'])) {
 						// welcome message

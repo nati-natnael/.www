@@ -12,7 +12,7 @@
             <?php
                 include 'util/db/params.php';
                 include 'util/db/database.php';
-                include 'util/validate.php';
+                include 'util/string_utils.php';
                 include 'util/err_handlers.php';
 
                 function handle_login() {
