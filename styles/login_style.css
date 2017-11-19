@@ -9,6 +9,7 @@
     padding: 2px;
     display: inline-block;
     vertical-align: top;
+    text-align: right;
 }
 
 .input_ele {
@@ -19,7 +20,7 @@
 }
 
 #password {
-    margin-top: 0.5em;
+    /*margin-top: 0.5em;*/
 }
 
 #s_id {
@@ -50,4 +51,10 @@
 
 #form_err_input {
     float: right;
+}
+
+#admin {
+    border: 1px dashed black;
+    padding: 0.5em;
+    margin-bottom: 1em;
 }

@@ -109,6 +109,7 @@
                     </div>
                     <div id="s_id">
                         <input type="submit" name="submit" value="Login">
+                        <a href="createAccount.php">Create account</a>
                     </div>
                 </div>
             </form>

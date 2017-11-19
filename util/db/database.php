@@ -1,6 +1,6 @@
 <?php
 	class DataBase {
-		var $conn = NULL;
+		var $conn;
 
 		function __construct() {
 			echo "Object created";
