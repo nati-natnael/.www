@@ -49,7 +49,7 @@
      *
      * Note:
      *  password must be at least 4 characters long
-     *
+     *  password cannot be empty
      */
     function passwordValidate($password) {
       $passLen = 4;
