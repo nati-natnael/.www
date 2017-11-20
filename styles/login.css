@@ -28,8 +28,9 @@
 }
 
 #s_id input {
-    padding: 0.1em 2em;
-    font-size: 1.5em;
+    padding: 0.7em 3em;
+    font-size: 0.9em;
+    margin-right: 1em;
 }
 
 #main_content {
