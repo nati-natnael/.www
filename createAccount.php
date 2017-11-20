@@ -3,14 +3,18 @@
     <head>
         <meta charset="UTF-8">
 		<Title>Create New User</Title>
-		<link rel="stylesheet" type="text/css" href="styles/common_style.css">
-		<link rel="stylesheet" type="text/css" href="styles/login_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/common.css">
+		<link rel="stylesheet" type="text/css" href="styles/login.css">
         <script type="text/javascript" src="scripts/login.js"></script>
 	</head>
     <body>
         <div id="main_content">
             <h2>Create Account</h2>
             <?php
+              error_reporting(E_ALL);
+              ini_set('display_errors', 1);
+              ini_set('display_startup_errors', 1);
+
                 include 'util/db/params.php';
                 include 'util/db/database.php';
                 include 'util/string_utils.php';
@@ -35,6 +39,18 @@
                         $err = TRUE;
                     }
 
+                    if (!passwordValidate($adminPass)) {
+                      // display password instruction
+                      $passInstruction  = "Admin Password guides:";
+                      $passInstruction .= "<ul>";
+                      $passInstruction .= "<li>password cannot be empty</li>";
+                      $passInstruction .= "<li>password cannot be less than 4 char long</li>";
+                      $passInstruction .= "</ul>";
+
+                      $errMsgs .= errMsg($passInstruction);
+                      $err = TRUE;
+                    }
+
                     if (!validate($firstName)) {
                         $errMsgs .= errMsg("first name should alpha-numeric");
                         $err = TRUE;
@@ -47,6 +63,18 @@
 
                     if (!validate($userName)) {
                         $errMsgs .= errMsg("User name should alpha-numeric");
+                        $err = TRUE;
+                    }
+
+                    if (!passwordValidate($password)) {
+                        // display password instruction
+                        $passInstruction  = "Password guides:";
+                        $passInstruction .= "<ul>";
+                        $passInstruction .= "<li>password cannot be empty</li>";
+                        $passInstruction .= "<li>password cannot be less than 4 char long</li>";
+                        $passInstruction .= "</ul>";
+
+                        $errMsgs .= errMsg($passInstruction);
                         $err = TRUE;
                     }
 
@@ -119,7 +147,7 @@
                     <div id="admin">
                         <div id="username">
                             <div class="label_ele">
-                                <label>Admin user name:</label>
+                                <label>Admin username:</label>
                             </div>
                             <div class="input_ele">
                                 <input id="username_in" type="text" name="adminuser">
