@@ -48,11 +48,12 @@
 
 #form_err_header {
     background: #afafaf;
-    padding: 1em;
+    padding: 0.4em;
 }
 
 #form_err_input {
     float: right;
+    padding: 5px 10px;
 }
 
 #admin {
