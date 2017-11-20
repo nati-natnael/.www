@@ -102,7 +102,7 @@
             <form method="post" action="">
                 <div id="login_elements">
                     <div id="username">
-                        <div class="label_ele">
+                        <div class="label_ele" style="width: 80px;">
                             <label>User Name:</label>
                         </div>
                         <div class="input_ele">
@@ -110,11 +110,12 @@
                         </div>
                     </div>
                     <div id="password">
-                        <div class="label_ele">
+                        <div class="label_ele" style="width: 80px;">
                             <label>Password:</label>
                         </div>
                         <div class="input_ele">
                             <input id="password_in" type="password" name="password">
+                            <a id="forgot" href="pass_recover.php">forgot password</a>
                         </div>
                     </div>
                     <div id="s_id">

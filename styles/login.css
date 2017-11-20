@@ -61,3 +61,16 @@
     padding: 0.5em;
     margin-bottom: 1em;
 }
+
+#forgot {
+    font-size: 0.8em;
+    color: gray;
+    float: right;
+    padding: 0.45em;
+}
+
+#confirm_user {
+    border: 1px dashed black;
+    padding: 0.5em;
+    margin-bottom: 0.5em;
+}
