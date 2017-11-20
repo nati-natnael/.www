@@ -119,7 +119,7 @@
                     </div>
                     <div id="s_id">
                         <input type="submit" name="submit" value="Login">
-                        <a href="createAccount.php">Create account</a>
+                        <a href="create_acc.php">Create account</a>
                     </div>
                 </div>
             </form>
