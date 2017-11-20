@@ -1,12 +1,12 @@
 /* Search box */
 #search_button_wrapper {
-	display: inline-block;	
+	display: inline-block;
 }
 
 #search {
 	background: white;
 	border: 1px solid lightgray;
-	display: inline-block;	
+	display: inline-block;
 }
 
 #search_clear {
@@ -17,6 +17,8 @@
 }
 
 #search input[type=button] {
+	padding: 5px 10px;
+  font-size: 0.8em;
 	margin-right: 0.4em;
 }
 
@@ -33,7 +35,7 @@
 /* Left Content style */
 /* Table */
 #table_wrapper {
-	margin-top: 1em;	
+	margin-top: 1em;
 }
 
 tr:nth-child(even) {

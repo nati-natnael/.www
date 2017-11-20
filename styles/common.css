@@ -27,7 +27,7 @@ input[type=button] {
 	background: #0b65b1;
 	color: white;
 	padding: 0.7em 3em;
-    font-size: 0.9em;
+  font-size: 0.9em;
 	cursor: pointer;
 }
 
@@ -39,6 +39,8 @@ input[type=button]:active {
 input[type=submit] {
 	background: #0b65b1;
 	color: white;
+	padding: 0.7em 3em;
+  font-size: 0.9em;
 	cursor: pointer;
 }
 
@@ -79,7 +81,7 @@ th {
 }
 
 #main_wrapper {
-	
+	padding: 0 1em;
 }
 
 #content_wrapper {
@@ -107,14 +109,16 @@ th {
 }
 
 #nav_cal_id {
-	padding: 10px 10px;
+	padding: 10px 30px;
+	font-size: 0.9em;
 	display: inline-block;
 	vertical-align: top;
 }
 
 #nav_form_id {
-	padding: 10px 10px;
-    margin-left: -9px;
+	padding: 10px 30px;
+  margin-left: -3px;
+	font-size: 0.9em;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -122,8 +126,9 @@ th {
 #logout {
 	float: right;
 	color: white;
-	padding: 10px 10px;
-    margin-left: -9px;
+	padding: 10px 30px;
+  margin-left: -3px;
+	font-size: 0.9em;
 	display: inline-block;
 	vertical-align: top;
 	cursor: pointer;
