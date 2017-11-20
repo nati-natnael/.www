@@ -3,12 +3,13 @@
     <head>
         <meta charset="UTF-8">
 		<Title>Login</Title>
-		<link rel="stylesheet" type="text/css" href="styles/common_style.css">
-		<link rel="stylesheet" type="text/css" href="styles/login_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/common.css">
+		<link rel="stylesheet" type="text/css" href="styles/login.css">
         <script type="text/javascript" src="scripts/login.js"></script>
 	</head>
     <body>
         <div id="main_content">
+            <h2>Login Page</h2>
             <?php
                 error_reporting(E_ALL);
                 ini_set('display_errors', 1);
@@ -29,6 +30,18 @@
 
                         if (!validate($userName)) {
                             $errMsgs .= errMsg("User name should alpha-numeric");
+                            $err = TRUE;
+                        }
+
+                        if (!passwordValidate($password)) {
+                            // display password instruction
+                            $passInstruction  = "Password guides:";
+                            $passInstruction .= "<ul>";
+                            $passInstruction .= "<li>password cannot be empty</li>";
+                            $passInstruction .= "<li>password cannot be less than 4 char long</li>";
+                            $passInstruction .= "</ul>";
+
+                            $errMsgs .= errMsg($passInstruction);
                             $err = TRUE;
                         }
 
@@ -56,11 +69,11 @@
                                     header('Location: calendar.php', true, 301);
                                     die();
                                 } else {
-                                    $errMsgs .= errMsg("User Not Found");
+                                    $errMsgs .= errMsg("The username or password is incorrect");
                                     $err = TRUE;
                                 }
                             } else {
-                                $errMsgs .= errMsg("failed to connect");
+                                $errMsgs .= errMsg("Mysql connection failed");
                                 $err = TRUE;
                             }
                         }
@@ -88,7 +101,6 @@
 
             <form method="post" action="">
                 <div id="login_elements">
-                    <h1>Login Page</h1>
                     <div id="username">
                         <div class="label_ele">
                             <label>User Name:</label>

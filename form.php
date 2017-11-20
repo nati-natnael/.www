@@ -3,26 +3,33 @@
 	<head>
 		<meta charset="UTF-8">
 		<Title>My Calendar</Title>
-		<link rel="stylesheet" type="text/css" href="styles/common_style.css">
-		<link rel="stylesheet" type="text/css" href="styles/form_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/common.css">
+		<link rel="stylesheet" type="text/css" href="styles/form.css">
 		<script type="text/javascript" src="scripts/form.js"></script>
 	</head>
 	<body>
 		<div id="main_wrapper">
 			<!-- Heading -->
 			<h2 id="heading">Calendar Input</h2>
-			
+
 			<!-- Check if logged in -->
 			<div id="wel_logout">
 				<?php
+					error_reporting(E_ALL);
+					ini_set('display_errors', 1);
+					ini_set('display_startup_errors', 1);
+
 					include 'util/string_utils.php';
 					session_start();
 					if (isset($_SESSION['username'])) {
+						$fullName   = $_SESSION['username'];
+						$namePieces = explode(",", $fullName);
+
 						// welcome message
 						$welcomeMsg  = '<div id="welcome">Welcome ';
-						$welcomeMsg .= capitalizeWords($_SESSION['username']);
+						$welcomeMsg .= capitalizeWords($namePieces[1]);
 						$welcomeMsg .= '</div>';
-						
+
 						echo $welcomeMsg;
 					} else {
 						header('Location: login.php', true, 301);
@@ -30,7 +37,7 @@
 					}
 				?>
 			</div>
-			
+
 			<!-- Nav -->
 			<nav id="main_nav">
 				<div id="inner_nav">
@@ -42,12 +49,12 @@
 
 			<div id="content_wrapper">
 				<!-- Heading -->
-				<div id="main_content">					
+				<div id="main_content">
 					<!-- Creating Event calendar -->
 					<?php
 						include "util/io.php";
 						include "util/err_handlers.php";
-																		
+
 						/**
 						 * Adde new Event to calendar json
 						 */

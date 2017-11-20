@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<Title>My Calendar</Title>
-		<link rel="stylesheet" type="text/css" href="styles/common_style.css">
-		<link rel="stylesheet" type="text/css" href="styles/cal_style.css">
+		<link rel="stylesheet" type="text/css" href="styles/common.css">
+		<link rel="stylesheet" type="text/css" href="styles/cal.css">
 		<script type="text/javascript" src="scripts/cal.js"></script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7RIsZSEBIlrc85IpIs8aeeb-EMyHh2YY&libraries=places">
 		</script>
@@ -13,18 +13,25 @@
 		<div id="main_wrapper">
 			<!-- Heading -->
 			<h2 id="heading">My Calendar</h2>
-			
+
 			<!-- Check if logged in -->
 			<div id="wel_logout">
 				<?php
+					error_reporting(E_ALL);
+					ini_set('display_errors', 1);
+					ini_set('display_startup_errors', 1);
+
 					include 'util/string_utils.php';
 					session_start();
 					if (isset($_SESSION['username'])) {
+						$fullName   = $_SESSION['username'];
+						$namePieces = explode(",", $fullName);
+
 						// welcome message
 						$welcomeMsg  = '<div id="welcome">Welcome ';
-						$welcomeMsg .= capitalizeWords($_SESSION['username']);
+						$welcomeMsg .= capitalizeWords($namePieces[1]);
 						$welcomeMsg .= '</div>';
-						
+
 						echo $welcomeMsg;
 					} else {
 						header('Location: login.php', true, 301);
@@ -32,7 +39,7 @@
 					}
 				?>
 			</div>
-			
+
 			<!-- navigation -->
 			<nav id="main_nav">
 				<div id="inner_nav">
@@ -51,13 +58,13 @@
 							<input type="button" value="Search" onclick="searchOnClick()">
 						</div>
 					</div>
-					
+
 					<div id="table_wrapper">
 						<!-- Calendar Table -->
 						<div id="ct_div">
 							<?php
 								include 'util/io.php';
-								
+
 								/**
 								 * Get time from div and compare.
 								 *
