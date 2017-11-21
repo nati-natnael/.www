@@ -141,7 +141,7 @@
                 }
             ?>
 
-            <form method="post" action="createAccount.php">
+            <form method="post" action="create_acc.php">
                 <div id="login_elements">
                     <!-- Admin user check -->
                     <div id="admin">
