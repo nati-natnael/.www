@@ -105,7 +105,7 @@
           $oldPass   = $_POST['oldpassword'];
           $newPass   = $_POST['newpassword'];
 
-					if ($database->login($loginName, $password)) {
+					if ($database->login($loginName, $oldPass)) {
             // update password
             $status = $database->updateName($loginName, $oldPass, $newPass);
 						if ($status) {
