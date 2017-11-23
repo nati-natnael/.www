@@ -59,138 +59,105 @@
         include 'util/db/database.php';
         include 'util/err_handlers.php';
 
-        function changeName() {
+        function changeName($database) {
           $firstName = $_POST['firstname'];
           $lastName  = $_POST['lastname'];
 
           $loginName = $_POST['loginname'];
           $password  = $_POST['password'];
 
-					global $db_servername;
-	        global $db_port;
-	        global $db_name;
-	        global $db_username;
-	        global $db_password;
-
-	        $database = new DataBase();
-	        $status = $database->connect($db_servername,
-	                                     $db_port,
-	                                     $db_name,
-	                                     $db_username,
-	                                     $db_password);
-
           $formattedName = $lastName . ", " . $firstName;
 
-					if ($status) {
-	          if ($database->login($loginName, $password)) {
-	            // update name
-	            $status = $database->updateName($formattedName, $loginName, $password);
-							if ($status) {
-								echo "update successful<br>";
-							} else {
-								echo "update failed<br>";
-							}
-	          } else {
-	            echo errMsg("The username or password is incorrect");
-	          }
-					} else {
-						echo errMsg("DataBase connection failed");
-					}
+
+          if ($database->login($loginName, $password)) {
+            // update name
+            $status = $database->updateName($formattedName, $loginName, $password);
+						if ($status) {
+							echo "update successful<br>";
+						} else {
+							echo "update failed<br>";
+						}
+          } else {
+            echo errMsg("The username or password is incorrect");
+          }
         }
 
-        function changeLogin() {
+        function changeLogin($database) {
           $oldLogin = $_POST['oldlogin'];
           $newLogin = $_POST['newlogin'];
           $password = $_POST['password'];
 
-					global $db_servername;
-	        global $db_port;
-	        global $db_name;
-	        global $db_username;
-	        global $db_password;
-
-	        $database = new DataBase();
-	        $status = $database->connect($db_servername,
-	                                     $db_port,
-	                                     $db_name,
-	                                     $db_username,
-	                                     $db_password);
-
-					if ($status) {
-	          if ($database->login($loginName, $password)) {
-	            // update login
-	            $status = $database->updateLogin($oldLogin, $newLogin, $password);
-							if ($status) {
-								echo "update successful<br>";
-							} else {
-								echo "update failed<br>";
-							}
-	          } else {
-	            echo errMsg("The username or password is incorrect");
-	          }
-					} else {
-						echo errMsg("DataBase connection failed");
-					}
+					if ($database->login($loginName, $password)) {
+            // update login
+            $status = $database->updateLogin($oldLogin, $newLogin, $password);
+						if ($status) {
+							echo "update successful<br>";
+						} else {
+							echo "update failed<br>";
+						}
+          } else {
+            echo errMsg("The username or password is incorrect");
+          }
         }
 
-        function changePassword() {
+        function changePassword($database) {
           $loginName = $_POST['loginname'];
           $oldPass   = $_POST['oldpassword'];
           $newPass   = $_POST['newpassword'];
 
-					global $db_servername;
-	        global $db_port;
-	        global $db_name;
-	        global $db_username;
-	        global $db_password;
-
-	        $database = new DataBase();
-	        $status = $database->connect($db_servername,
-	                                     $db_port,
-	                                     $db_name,
-	                                     $db_username,
-	                                     $db_password);
-
-					if ($status) {
-	          if ($database->login($loginName, $password)) {
-	            // update password
-	            $status = $database->updateName($loginName, $oldPass, $newPass);
-							if ($status) {
-								echo "update successful<br>";
-							} else {
-								echo "update failed<br>";
-							}
-	          } else {
-	            echo errMsg("The username or password is incorrect");
-	          }
-					} else {
-						echo errMsg("DataBase connection failed");
-					}
+					if ($database->login($loginName, $password)) {
+            // update password
+            $status = $database->updateName($loginName, $oldPass, $newPass);
+						if ($status) {
+							echo "update successful<br>";
+						} else {
+							echo "update failed<br>";
+						}
+          } else {
+            echo errMsg("The username or password is incorrect");
+          }
         }
 
         function handlePost() {
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $submitType = $_POST['submit'];
 
-            switch ($submitType) {
+						global $db_servername;
+		        global $db_port;
+		        global $db_name;
+		        global $db_username;
+		        global $db_password;
 
-              case 'Change Name':
-                changeName();
-                break;
+		        $database = new DataBase();
+		        $status = $database->connect($db_servername,
+		                                     $db_port,
+		                                     $db_name,
+		                                     $db_username,
+		                                     $db_password);
 
-              case 'Change Login':
-                changeLogin();
-                break;
+						if ($status) {
+	            switch ($submitType) {
 
-              case 'Change Password':
-                changePassword();
-                break;
+	              case 'Change Name':
+	                changeName($database);
+	                break;
 
-              default:
-                echo "Default hit";
+	              case 'Change Login':
+	                changeLogin($database);
+	                break;
 
-            }
-          }
+	              case 'Change Password':
+	                changePassword($database);
+	                break;
+
+	              default:
+	                echo "Default hit";
+
+	            }
+	          }
+					} else {
+						echo errMsg("DataBase connection failed");
+					}
         }
 
         handlePost();
