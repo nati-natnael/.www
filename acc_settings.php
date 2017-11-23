@@ -153,9 +153,9 @@
 	                echo "Default hit";
 
 	            }
-	          }
-					} else {
-						echo errMsg("DataBase connection failed");
+	          } else {
+							echo errMsg("DataBase connection failed");
+						}
 					}
         }
 
