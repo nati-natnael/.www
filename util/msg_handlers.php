@@ -17,13 +17,13 @@
        return $msg;
     }
 
-    function successMsg($msg) {
+    function successMsg($success) {
       $msg  = "<p style='color: green;'>";
       $msg .= "<img src='imgs/check_mark.png'
                     alt='Check Mark Image'
                     style='width: 1.1em; height: 1.1em;'> ";
       $msg .= "<span style='vertical-align: top'>";
-      $msg .= "Calendar events cleared.";
+      $msg .= $success;
       $msg .= "</span>";
       $msg .= "</p>";
 

@@ -124,16 +124,7 @@
 									$status = writeJSonToFile("json/calendar.txt", $jsonString);
 
 									if ($status) {
-										$clearMsg  = "<p style='color: green;'>";
-										$clearMsg .= "<img src='imgs/check_mark.png'
-														   alt='Check Mark Image'
-														   style='width: 1.1em; height: 1.1em;'> ";
-										$clearMsg .= "<span style='vertical-align: top'>";
-										$clearMsg .= "Calendar events cleared.";
-										$clearMsg .= "</span>";
-										$clearMsg .= "</p>";
-
-										echo $clearMsg;
+										echo successMsg("Calendar events cleared.");
 									} else {
 										echo errMsg("Unable to clear events");
 									}

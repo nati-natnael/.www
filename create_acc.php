@@ -98,16 +98,7 @@
                                 $name = $lastName . ", " . $firstName;
 
                                 if ($database->insert($name, $userName, $password)) {
-                                  $addedMsg  = "<p style='color: green;'>";
-                                  $addedMsg .= "<img src='imgs/check_mark.png'
-                                             alt='Check Mark Image'
-                                             style='width: 1.1em; height: 1.1em;'> ";
-                                  $addedMsg .= "<span style='vertical-align: top'>";
-                                  $addedMsg .= "$firstName added.";
-                                  $addedMsg .= "</span>";
-                                  $addedMsg .= "</p>";
-
-                                  echo $addedMsg;
+                                  echo successMsg("$firstName added.");
                                 } else {
                                     $errMsgs = errMsg("New user creation failed");
                                     $err = TRUE;
