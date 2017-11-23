@@ -57,25 +57,7 @@
 
         include 'util/db/params.php';
         include 'util/db/database.php';
-        include 'util/string_utils.php';
         include 'util/err_handlers.php';
-
-        global $db_servername;
-        global $db_port;
-        global $db_name;
-        global $db_username;
-        global $db_password;
-
-        $database = new DataBase();
-        $status = $database->connect($db_servername,
-                                     $db_port,
-                                     $db_name,
-                                     $db_username,
-                                     $db_password);
-
-        if (!$status) {
-          die('Data base connection failed');
-        }
 
         function changeName() {
           $firstName = $_POST['firstname'];
@@ -84,14 +66,36 @@
           $loginName = $_POST['loginname'];
           $password  = $_POST['password'];
 
+					global $db_servername;
+	        global $db_port;
+	        global $db_name;
+	        global $db_username;
+	        global $db_password;
+
+	        $database = new DataBase();
+	        $status = $database->connect($db_servername,
+	                                     $db_port,
+	                                     $db_name,
+	                                     $db_username,
+	                                     $db_password);
+
           $formattedName = $lastName . ", " . $firstName;
 
-          if ($database->login($loginName, $password)) {
-            // update name
-            $database->updateName($formattedName, $loginName, $password);
-          } else {
-            echo errMsg("The username or password is incorrect");
-          }
+					if ($status) {
+	          if ($database->login($loginName, $password)) {
+	            // update name
+	            $status = $database->updateName($formattedName, $loginName, $password);
+							if ($status) {
+								echo "update successful<br>";
+							} else {
+								echo "update failed<br>";
+							}
+	          } else {
+	            echo errMsg("The username or password is incorrect");
+	          }
+					} else {
+						echo errMsg("DataBase connection failed");
+					}
         }
 
         function changeLogin() {
@@ -99,12 +103,21 @@
           $newLogin = $_POST['newlogin'];
           $password = $_POST['password'];
 
-          if ($database->login($loginName, $password)) {
-            // update login
-            $database->updateLogin($oldLogin, $newLogin, $password);
-          } else {
-            errMsg("The username or password is incorrect");
-          }
+					if ($status) {
+	          if ($database->login($loginName, $password)) {
+	            // update login
+	            $status = $database->updateLogin($oldLogin, $newLogin, $password);
+							if ($status) {
+								echo "update successful<br>";
+							} else {
+								echo "update failed<br>";
+							}
+	          } else {
+	            echo errMsg("The username or password is incorrect");
+	          }
+					} else {
+						echo errMsg("DataBase connection failed");
+					}
         }
 
         function changePassword() {
@@ -112,12 +125,21 @@
           $oldPass   = $_POST['oldpassword'];
           $newPass   = $_POST['newpassword'];
 
-          if ($database->login($loginName, $password)) {
-            // update password
-            $database->updateName($loginName, $oldPass, $newPass);
-          } else {
-            errMsg("The username or password is incorrect");
-          }
+					if ($status) {
+	          if ($database->login($loginName, $password)) {
+	            // update password
+	            $status = $database->updateName($loginName, $oldPass, $newPass);
+							if ($status) {
+								echo "update successful<br>";
+							} else {
+								echo "update failed<br>";
+							}
+	          } else {
+	            echo errMsg("The username or password is incorrect");
+	          }
+					} else {
+						echo errMsg("DataBase connection failed");
+					}
         }
 
         function handlePost() {

@@ -46,8 +46,8 @@
 
 		function updateName($new_name, $acc_login, $acc_pass) {
 			$query  = "UPDATE tbl_accounts ";
-			$query .= "SET acc_name = $new_name ";
-			$query .= "WHERE acc_login = $acc_login AND acc_password = ".sha1($acc_pass);
+			$query .= "SET acc_name = '$new_name' ";
+			$query .= "WHERE acc_login = '$acc_login' AND acc_password = '".sha1($acc_pass)."'";
 
 			$result = $this->conn->query($query);
 
@@ -56,22 +56,22 @@
 
 		function updateLogin($old_login, $new_login, $acc_pass) {
 			$query  = "UPDATE tbl_accounts ";
-			$query .= "SET acc_login = $new_login ";
-			$query .= "WHERE acc_login = $old_login AND acc_password = ".sha1($acc_pass);
+			$query .= "SET acc_login = '$new_login' ";
+			$query .= "WHERE acc_login = '$old_login' AND acc_password = '".sha1($acc_pass)."'";
 
 			$result = $this->conn->query($query);
 
-			return $result:
+			return $result;
 		}
 
 		function updatePass($acc_login, $old_pass, $new_pass) {
 			$query  = "UPDATE tbl_accounts ";
-			$query .= "SET acc_password = $new_pass ";
-			$query .= "WHERE acc_login = $acc_login AND acc_password = ".sha1($old_pass);
+			$query .= "SET acc_password = '$new_pass' ";
+			$query .= "WHERE acc_login = '$acc_login' AND acc_password = '".sha1($old_pass)."'";
 
 			$result = $this->conn->query($query);
 
-			return $result:
+			return $result;
 		}
 
 		/**
