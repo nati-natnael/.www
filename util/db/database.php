@@ -44,18 +44,34 @@
 			return $result;
 		}
 
-		/**
-		 * update values
-		 *
-		 * Note:
-		 * 	will use $acc_login to find account
-		 *
-		 * :param $acc_name:
-		 * :param $acc_login:
-		 * :param $acc_pass:
-		 */
-		function update($acc_name, $acc_login, $acc_pass) {
-			echo "not developed yet";
+		function updateName($new_name, $acc_login, $acc_pass) {
+			$query  = "UPDATE tbl_accounts ";
+			$query .= "SET acc_name = $new_name ";
+			$query .= "WHERE acc_login = $acc_login AND acc_password = ".sha1($acc_pass);
+
+			$result = $this->conn->query($query);
+
+			return $result:
+		}
+
+		function updateLogin($old_login, $new_login, $acc_pass) {
+			$query  = "UPDATE tbl_accounts ";
+			$query .= "SET acc_login = $new_login ";
+			$query .= "WHERE acc_login = $old_login AND acc_password = ".sha1($acc_pass);
+
+			$result = $this->conn->query($query);
+
+			return $result:
+		}
+
+		function updatePass($acc_login, $old_pass, $new_pass) {
+			$query  = "UPDATE tbl_accounts ";
+			$query .= "SET acc_password = $new_pass ";
+			$query .= "WHERE acc_login = $acc_login AND acc_password = ".sha1($old_pass);
+
+			$result = $this->conn->query($query);
+
+			return $result:
 		}
 
 		/**
