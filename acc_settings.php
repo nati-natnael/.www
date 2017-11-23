@@ -87,7 +87,7 @@
           $newLogin = $_POST['newlogin'];
           $password = $_POST['password'];
 
-					if ($database->login($loginName, $password)) {
+					if ($database->login($oldLogin, $password)) {
             // update login
             $status = $database->updateLogin($oldLogin, $newLogin, $password);
 						if ($status) {
