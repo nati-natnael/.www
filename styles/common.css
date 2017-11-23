@@ -1,6 +1,6 @@
 body {
+	background: #f5f5f5;
 	text-align: center;
-	background: #efefef;
 	font-family: Helvetica, Courier,Verdana,sans-serif;
 }
 
@@ -22,6 +22,14 @@ input {
 
 input:focus {
 	outline-width: 0;
+}
+
+input[type=text] {
+	border: 1px solid gray;
+}
+
+input[type=password] {
+	border: 1px solid gray;
 }
 
 input[type=button] {
@@ -70,9 +78,10 @@ th {
 }
 
 #wel_logout {
-    padding: 0.5em;
-    margin-bottom: 0.2em;
-    background: white;
+	background: white;
+	padding: 0.5em;
+	margin-bottom: 0.2em;
+	border: 1px solid lightgray;
 	text-align: left;
 }
 
@@ -124,8 +133,19 @@ th {
 	vertical-align: top;
 }
 
+#acc_setting {
+	/*float: right;*/
+	color: white;
+	padding: 10px 30px;
+  margin-left: -5px;
+	font-size: 0.9em;
+	display: inline-block;
+	vertical-align: top;
+	cursor: pointer;
+}
+
 #logout {
-	float: right;
+	/*float: right;*/
 	color: white;
 	padding: 10px 30px;
   margin-left: -3px;
@@ -144,5 +164,9 @@ th {
 }
 
 #logout:hover {
+	background: #298de2;
+}
+
+#acc_setting:hover {
 	background: #298de2;
 }
