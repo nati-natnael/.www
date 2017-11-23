@@ -103,6 +103,19 @@
           $newLogin = $_POST['newlogin'];
           $password = $_POST['password'];
 
+					global $db_servername;
+	        global $db_port;
+	        global $db_name;
+	        global $db_username;
+	        global $db_password;
+
+	        $database = new DataBase();
+	        $status = $database->connect($db_servername,
+	                                     $db_port,
+	                                     $db_name,
+	                                     $db_username,
+	                                     $db_password);
+
 					if ($status) {
 	          if ($database->login($loginName, $password)) {
 	            // update login
@@ -124,6 +137,19 @@
           $loginName = $_POST['loginname'];
           $oldPass   = $_POST['oldpassword'];
           $newPass   = $_POST['newpassword'];
+
+					global $db_servername;
+	        global $db_port;
+	        global $db_name;
+	        global $db_username;
+	        global $db_password;
+
+	        $database = new DataBase();
+	        $status = $database->connect($db_servername,
+	                                     $db_port,
+	                                     $db_name,
+	                                     $db_username,
+	                                     $db_password);
 
 					if ($status) {
 	          if ($database->login($loginName, $password)) {
