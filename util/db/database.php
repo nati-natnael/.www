@@ -51,7 +51,7 @@
 
 			$result = $this->conn->query($query);
 
-			return $result:
+			return $result;
 		}
 
 		function updateLogin($old_login, $new_login, $acc_pass) {
