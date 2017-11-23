@@ -16,4 +16,17 @@
 
        return $msg;
     }
+
+    function successMsg($msg) {
+      $msg  = "<p style='color: green;'>";
+      $msg .= "<img src='imgs/check_mark.png'
+                    alt='Check Mark Image'
+                    style='width: 1.1em; height: 1.1em;'> ";
+      $msg .= "<span style='vertical-align: top'>";
+      $msg .= "Calendar events cleared.";
+      $msg .= "</span>";
+      $msg .= "</p>";
+
+      return $msg;
+    }
 ?>

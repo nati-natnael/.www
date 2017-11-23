@@ -54,7 +54,7 @@
 					<!-- Creating Event calendar -->
 					<?php
 						include "util/io.php";
-						include "util/err_handlers.php";
+						include "util/msg_handlers.php";
 
 						/**
 						 * Adde new Event to calendar json

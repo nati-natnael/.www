@@ -57,7 +57,7 @@
 
         include 'util/db/params.php';
         include 'util/db/database.php';
-        include 'util/err_handlers.php';
+        include 'util/msg_handlers.php';
 
         function changeName($database) {
           $firstName = $_POST['firstname'];
@@ -68,14 +68,13 @@
 
           $formattedName = $lastName . ", " . $firstName;
 
-
           if ($database->login($loginName, $password)) {
             // update name
             $status = $database->updateName($formattedName, $loginName, $password);
 						if ($status) {
-							echo "update successful<br>";
+							echo successMsg("User name updated");
 						} else {
-							echo "update failed<br>";
+							echo errMsg("update failed");
 						}
           } else {
             echo errMsg("The username or password is incorrect");
@@ -91,9 +90,9 @@
             // update login
             $status = $database->updateLogin($oldLogin, $newLogin, $password);
 						if ($status) {
-							echo "update successful<br>";
+							echo successMsg("Login name updated");
 						} else {
-							echo "update failed<br>";
+							echo errMsg("Login update failed");
 						}
           } else {
             echo errMsg("The username or password is incorrect");
@@ -109,9 +108,9 @@
             // update password
             $status = $database->updateName($loginName, $oldPass, $newPass);
 						if ($status) {
-							echo "update successful<br>";
+							echo successMsg("Password updated");
 						} else {
-							echo "update failed<br>";
+							echo errMsg("Password update failed");
 						}
           } else {
             echo errMsg("The username or password is incorrect");

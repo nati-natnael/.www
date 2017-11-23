@@ -18,7 +18,7 @@
                 include 'util/db/params.php';
                 include 'util/db/database.php';
                 include 'util/string_utils.php';
-                include 'util/err_handlers.php';
+                include 'util/msg_handlers.php';
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     # old credentials
