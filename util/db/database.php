@@ -66,7 +66,7 @@
 
 		function updatePass($acc_login, $old_pass, $new_pass) {
 			$query  = "UPDATE tbl_accounts ";
-			$query .= "SET acc_password = '$new_pass' ";
+			$query .= "SET acc_password = '" . sha1($new_pass) . "' ";
 			$query .= "WHERE acc_login = '$acc_login' AND acc_password = '".sha1($old_pass)."'";
 
 			$result = $this->conn->query($query);
