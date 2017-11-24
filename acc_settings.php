@@ -191,7 +191,7 @@
                       <label>Password:</label>
                   </div>
                   <div class="input_ele">
-                      <input id="password_in" type="text" name="password">
+                      <input id="password_in" type="password" name="password">
                   </div>
               </div>
               <div id="first_name">
@@ -242,7 +242,7 @@
                       <label>Password:</label>
                   </div>
                   <div class="input_ele">
-                      <input id="password_in" type="text" name="password">
+                      <input id="password_in" type="password" name="password">
                   </div>
               </div>
 
@@ -285,7 +285,7 @@
                       <label>Old password:</label>
                   </div>
                   <div class="input_ele">
-                      <input id="login_in" type="text" name="oldpassword">
+                      <input id="login_in" type="password" name="oldpassword">
                   </div>
               </div>
 
@@ -294,7 +294,7 @@
                       <label>New password:</label>
                   </div>
                   <div class="input_ele">
-                      <input id="password_in" type="text" name="newpassword">
+                      <input id="password_in" type="password" name="newpassword">
                   </div>
               </div>
               <div class="submit_ele">
