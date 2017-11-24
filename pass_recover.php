@@ -24,11 +24,11 @@
                     # old credentials
                     $userName = $_POST['username'];
                     $fullname = $_POST['fullname'];
-                    
+
                     # proposed new credentials
                     $newPass     = $_POST['newpassword'];
                     $confirmPass = $_POST['confirmnewpassword'];
-                    
+
                     # if error at any point
                     if ($err) {
                         $errDiv  = "<div id='form_err'>";
@@ -69,14 +69,14 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- new pass input -->
                     <div id="password">
                         <div class="label_ele">
                             <label>New Password:</label>
                         </div>
                         <div class="input_ele">
-                            <input id="username_in" type="text" name="newpassword">
+                            <input id="username_in" type="password" name="newpassword">
                         </div>
                     </div>
                     <div id="password">
