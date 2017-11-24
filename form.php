@@ -43,8 +43,10 @@
 				<div id="inner_nav">
 					<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
 					<a href="#"><div id="nav_form_id">Form Input</div></a>
-					<a href="logout.php"><div id="logout">Logout</div></a>
-					<a href="acc_settings.php"><div id="acc_setting">Account Setting</div></a>
+					<div id="right_menu">
+						<a href="acc_settings.php"><div id="acc_setting">Account Setting</div></a>
+						<a href="logout.php"><div id="logout">Logout</div></a>
+					</div>
 				</div>
 			</nav>
 

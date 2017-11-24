@@ -27,23 +27,22 @@
 }
 
 #content_wrapper {
-  background: white;
+  background: lightgray;
   margin-top: 1em;
-  border: 1px solid lightgray;
 }
 
 #chng_name {
   min-width: 20em;
   padding: 1em;
   margin: 0.5em;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid white;
 }
 
 #chng_login {
   min-width: 20em;
   padding: 1em;
   margin: 0.5em;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid white;
 }
 
 #chng_pass {

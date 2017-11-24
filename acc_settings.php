@@ -33,19 +33,20 @@
 
 						echo $welcomeMsg;
 					} else {
-						// header('Location: login.php', true, 301);
-						// die();
+						header('Location: login.php', true, 301);
+						die();
 					}
 				?>
 			</div>
 
 			<!-- navigation -->
 			<nav id="main_nav">
-				<div id="inner_nav">
-					<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
-					<a href="form.php"><div id="nav_form_id">Form Input</div></a>
-					<a href="logout.php"><div id="logout">Logout</div></a>
+				<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
+				<a href="form.php"><div id="nav_form_id">Form Input</div></a>
+
+				<div id="right_menu">
 					<a href="#"><div id="acc_setting">Account Setting</div></a>
+					<a href="logout.php"><div id="logout">Logout</div></a>
 				</div>
 			</nav>
 
@@ -166,7 +167,8 @@
         <!-- Change users full name -->
         <div id="update_acc">
           <div id="chng_name">
-            <div style="margin-bottom: 1em;">
+            <div style="margin-bottom: 1em;
+										    border-bottom: 1px solid black;">
               Change user name
               <img id="name_img"
                    class="show_form_img"
@@ -216,7 +218,8 @@
 
           <!-- change users login name -->
           <div id="chng_login">
-            <div style="margin-bottom: 1em;">
+						<div style="margin-bottom: 1em;
+										    border-bottom: 1px solid black;">
               Update login
               <img id="login_img"
                    class="show_form_img"
@@ -259,7 +262,8 @@
 
           <!-- change users password -->
           <div id="chng_pass">
-            <div style="margin-bottom: 1em;">
+						<div style="margin-bottom: 1em;
+										    border-bottom: 1px solid black;">
               Update password
               <img id="password_img"
                    class="show_form_img"
