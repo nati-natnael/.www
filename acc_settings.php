@@ -107,7 +107,7 @@
 
 					if ($database->login($loginName, $oldPass)) {
             // update password
-            $status = $database->updateName($loginName, $oldPass, $newPass);
+            $status = $database->updatePass($loginName, $oldPass, $newPass);
 						if ($status) {
 							echo successMsg("Password updated");
 						} else {
