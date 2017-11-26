@@ -138,7 +138,7 @@
                     <div id="admin">
                         <div id="username">
                             <div class="label_ele">
-                                <label>Admin username:</label>
+                                <label>Admin username</label>
                             </div>
                             <div class="input_ele">
                                 <input id="username_in" type="text" name="adminuser">
@@ -146,7 +146,7 @@
                         </div>
                         <div id="password">
                             <div class="label_ele">
-                                <label>Admin Password:</label>
+                                <label>Admin Password</label>
                             </div>
                             <div class="input_ele">
                                 <input id="password_in" type="password" name="adminpass">
@@ -159,7 +159,7 @@
                         <!-- First name -->
                         <div id="firstname">
                             <div class="label_ele">
-                                <label>First name:</label>
+                                <label>First name</label>
                             </div>
                             <div class="input_ele">
                                 <input id="firstname_in" type="text" name="firstname">
@@ -169,7 +169,7 @@
                         <!-- last name -->
                         <div id="lastname">
                             <div class="label_ele">
-                                <label>Last name:</label>
+                                <label>Last name</label>
                             </div>
                             <div class="input_ele">
                                 <input id="lastname_in" type="text" name="lastname">
@@ -179,7 +179,7 @@
                         <!-- New Login credentials -->
                         <div id="username">
                             <div class="label_ele">
-                                <label>Login name:</label>
+                                <label>Login name</label>
                             </div>
                             <div class="input_ele">
                                 <input id="username_in" type="text" name="username">
@@ -187,7 +187,7 @@
                         </div>
                         <div id="password">
                             <div class="label_ele">
-                                <label>Password:</label>
+                                <label>Password</label>
                             </div>
                             <div class="input_ele">
                                 <input id="password_in" type="password" name="password">

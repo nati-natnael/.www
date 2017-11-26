@@ -204,7 +204,7 @@
 								<div id="f_elements">
 									<div id="e_id">
 										<div class="label_ele">
-											<label>Event Name:</label>
+											<label>Event Name</label>
 										</div>
 										<div class="input_ele">
 											<input id="event_name_in" type="text" name="eventname">
@@ -213,7 +213,7 @@
 
 									<div id="st_id">
 										<div class="label_ele">
-											<label>Start Time:</label>
+											<label>Start Time</label>
 										</div>
 										<div class="input_ele">
 											<input type="time" name="starttime">
@@ -222,7 +222,7 @@
 
 									<div id="dt_id">
 										<div class="label_ele">
-											<label>End Time:</label>
+											<label>End Time</label>
 										</div>
 										<div class="input_ele">
 											<input type="time" name="endtime">
@@ -231,7 +231,7 @@
 
 									<div id="l_id">
 										<div class="label_ele">
-											<label>Location:</label>
+											<label>Location</label>
 										</div>
 										<div class="input_ele">
 											<input id="location_in" type="text" name="location">
@@ -240,7 +240,7 @@
 
 									<div id="img_id">
 										<div class="label_ele">
-											<label>Image url:</label>
+											<label>Image url</label>
 										</div>
 										<div class="input_ele">
 											<input id="img_in" type="text" name="img_url">
@@ -249,7 +249,7 @@
 
 									<div id="dotw_id">
 										<div class="label_ele">
-											<label>Day of the Week:</label>
+											<label>Day of the Week</label>
 										</div>
 										<div class="input_ele">
 											<select name="day">

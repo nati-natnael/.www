@@ -54,7 +54,7 @@
                     <div id="confirm_user">
                         <div id="username">
                             <div class="label_ele">
-                                <label>Login:</label>
+                                <label>Login</label>
                             </div>
                             <div class="input_ele">
                                 <input id="username_in" type="text" name="username">
@@ -62,7 +62,7 @@
                         </div>
                         <div id="fullname">
                             <div class="label_ele">
-                                <label>Full name:</label>
+                                <label>Full name</label>
                             </div>
                             <div class="input_ele">
                                 <input id="username_in" type="text" name="fullname">
@@ -73,7 +73,7 @@
                     <!-- new pass input -->
                     <div id="password">
                         <div class="label_ele">
-                            <label>New Password:</label>
+                            <label>New Password</label>
                         </div>
                         <div class="input_ele">
                             <input id="username_in" type="password" name="newpassword">
@@ -81,7 +81,7 @@
                     </div>
                     <div id="password">
                         <div class="label_ele">
-                            <label>Confirm New Password:</label>
+                            <label>Confirm New Password</label>
                         </div>
                         <div class="input_ele">
                             <input id="password_in" type="password" name="password">

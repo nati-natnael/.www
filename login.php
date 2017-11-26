@@ -103,7 +103,7 @@
                 <div id="login_elements">
                     <div id="username">
                         <div class="label_ele" style="width: 80px;">
-                            <label>User Name:</label>
+                            <label>User Name</label>
                         </div>
                         <div class="input_ele">
                             <input id="username_in" type="text" name="username">
@@ -111,7 +111,7 @@
                     </div>
                     <div id="password">
                         <div class="label_ele" style="width: 80px;">
-                            <label>Password:</label>
+                            <label>Password</label>
                         </div>
                         <div class="input_ele">
                             <input id="password_in" type="password" name="password">
