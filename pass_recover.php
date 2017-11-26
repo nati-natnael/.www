@@ -47,7 +47,7 @@
                 }
             ?>
 
-            <form method="post" action="create_acc.php">
+            <form method="post" action="pass_recover.php">
                 <div id="login_elements">
                     <!-- Confirm the user is the user -->
                     <!-- For Security purposes -->
