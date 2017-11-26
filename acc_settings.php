@@ -167,8 +167,7 @@
         <!-- Change users full name -->
         <div id="update_acc">
           <div id="chng_name">
-            <div style="margin-bottom: 1em;
-										    border-bottom: 1px solid black;">
+            <div style="margin-bottom: 1em;">
               Change user name
               <img id="name_img"
                    class="show_form_img"
@@ -218,8 +217,7 @@
 
           <!-- change users login name -->
           <div id="chng_login">
-						<div style="margin-bottom: 1em;
-										    border-bottom: 1px solid black;">
+						<div style="margin-bottom: 1em;">
               Update login
               <img id="login_img"
                    class="show_form_img"
@@ -262,8 +260,7 @@
 
           <!-- change users password -->
           <div id="chng_pass">
-						<div style="margin-bottom: 1em;
-										    border-bottom: 1px solid black;">
+						<div style="margin-bottom: 1em;">
               Update password
               <img id="password_img"
                    class="show_form_img"
