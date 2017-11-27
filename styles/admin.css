@@ -26,6 +26,76 @@
   cursor: pointer;
 }
 
+.user_id {
+  text-align: center;
+}
+
+.user_name {
+
+}
+
+.user_login {
+  /*padding: 0.5em;*/
+}
+
+.user_newpass {
+  padding: 0.5em;
+}
+
+.user_name input {
+  max-width: 8em;
+  border: none;
+}
+
+.user_login input {
+  max-width: 8em;
+  border: none;
+}
+
+.user_newpass input {
+  max-width: 15em;
+  border: none;
+}
+
+.edit_btn {
+  padding: 0.5em;
+  display: inline-block;
+}
+
+.delete_btn {
+  padding: 0.5em;
+  display: inline-block;
+}
+
+/* Table */
+.table {
+  display: table;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.tr {
+  display:table-row;
+}
+
+.th {
+  display:table-cell;
+}
+
+.td {
+  display:table-cell;
+  padding: 0 0.5em;
+  border: 1px solid black;
+}
+
+.td.head {
+  background: #0b65b1;
+  padding: 0.5em;
+  color: white;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
 #content_wrapper {
   background: lightgray;
   margin-top: 1em;
@@ -33,12 +103,14 @@
 }
 
 #user_lst {
-  background: red;
   padding: 1em;
 }
 
+#user_lst_view {
+  background: white;
+}
+
 #add_new_user {
-  background: blue;
   padding: 1em;
 }
 

@@ -5,7 +5,7 @@
 		<Title>My Account</Title>
 		<link rel="stylesheet" type="text/css" href="styles/common.css">
     <link rel="stylesheet" type="text/css" href="styles/admin.css">
-    <script type="text/javascript" src="scripts/acc_settings.js"></script>
+    <script type="text/javascript" src="scripts/admin.js"></script>
 		</script>
 	</head>
 	<body style="background: silver;">
@@ -63,39 +63,62 @@
 
               function openTable() {
 								# Table headers
-								$table  = "<table>";
-								$table .= "<thead>";
-								$table .= "<tr>";
-								$table .= "<th>ID</th>";
-								$table .= "<th>Login</th>";
-								$table .= "<th>New Password</th>";
-								$table .= "<th>Action</th>";
-								$table .= "</tr>";
-								$table .= "</thead>";
+								$table  = "<div class='table'>";
+								$table .= "<div class='tr'>";
+								$table .= "<div class='td head'>ID</div>";
+								$table .= "<div class='td head'>Name</div>";
+								$table .= "<div class='td head'>Login</div>";
+								$table .= "<div class='td head'>New Password</div>";
+								$table .= "<div class='td head'>Action</div>";
+								$table .= "</div>";
 
-								echo $table;
+								return $table;
               }
 
               function closeTable() {
-								$table  = "</tbody>";
-								$table .= "</table>";
+								$table = "</div>";
 
-								echo $table;
+								return $table;
               }
 
               /**
                * Creates row with a single user info
                */
               function userRow ($id, $name, $login) {
-                $user  = "<tr>";
-                $user .= "<div class='row'>";
-								$user .= "<div id='user_" . $id . "_id'>$id</div>";
-								$user .= "<div id='user_" . $id . "_name'>$name</div>";
-								$user .= "<div id='user_" . $id . "_login'>$login</div>";
-								$user .= "<div id='user_" . $id . "_newpass'></div>";
-								$user .= "<div id='user_" . $id . "_btns'></div>";
-                $user .= "</div>";
-                $user .= "</tr>";
+                $user  = "<form id='user_$id' class='tr' method='post' action='admin.php'>";
+								$user .= "<div class='td user_id'>$id</div>";
+
+								$user .= "<div class='td user_name'>";
+								$user .= "<input id='name_in_$id' type='text' value='$name' readonly>";
+								$user .= "</div>";
+								$user .= "<div class='td user_login'>";
+								$user .= "<input id='login_in_$id' type='text' value='$login' readonly>";
+								$user .= "</div>";
+
+								$user .= "<div class='td user_newpass'>";
+								$user .= "<input id='newpass_$id' name='newpassword' type='text' readonly>";
+								$user .= "</div>";
+
+								// Action buttons
+								$user .= "<div class='td'>";
+
+								$user .= "<div class='edit_btn'>";
+								$user .= "<input id='edit_$id' ";
+								$user .=        "name='$id' ";
+								$user .= 				"type='button' ";
+								$user .= 				"value='Edit' ";
+								$user .= 				"onclick='edit(event)'>";
+								$user .= "</div>";
+
+								$user .= "<div class='delete_btn'>";
+								$user .= "<input id='delete_$id' ";
+								$user .= 			 	"name='$id' type='submit' ";
+								$user .= 				"value='Delete' ";
+								$user .= 				"onclick='cancel(event)'>";
+								$user .= "</div>";
+
+								$user .= "</div>";
+								$user .= "</form>";
 
                 return $user;
               }
@@ -122,18 +145,21 @@
                   $results = $database->execQuery($query);
 
                   if ($results != NULL) {
-                    openTable();
+                    $table = openTable();
 										$id = 1;
                     while ($row = $results->fetch_assoc()) {
                       // $id    = $row['rownum'];
                       $name  = $row['acc_name'];
                       $login = $row['acc_login'];
 
-                      echo userRow($id, $name, $login);
+
+                      $table .= userRow($id, $name, $login);
 
 											$id++;
                     }
-                    closeTable();
+                    $table .= closeTable();
+
+										echo $table;
                   } else {
                     echo "No Data Found";
                   }

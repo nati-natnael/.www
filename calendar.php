@@ -34,8 +34,8 @@
 
 						echo $welcomeMsg;
 					} else {
-						// header('Location: login.php', true, 301);
-						// die();
+						header('Location: login.php', true, 301);
+						die();
 					}
 				?>
 			</div>
