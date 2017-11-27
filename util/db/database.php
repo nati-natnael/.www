@@ -35,7 +35,7 @@
 		 * executes general mysql query
 		 */
 		function execQuery ($queryString) {
-			$result = $this->conn->query($query);
+			$result = $this->conn->query($queryString);
 
 			if (!$result) {
 				return NULL;

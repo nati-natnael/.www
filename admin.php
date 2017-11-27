@@ -50,33 +50,50 @@
 
       <!-- content -->
       <div id="content_wrapper">
-        <?php echo "hello"; ?>
         <div id="user_lst">
           <div id="user_lst_view">
             <?php
-              error_reporting(E_ALL);
-              ini_set('display_errors', 1);
-              ini_set('display_startup_errors', 1);
+              // error_reporting(E_ALL);
+              // ini_set('display_errors', 1);
+              // ini_set('display_startup_errors', 1);
 
               include 'util/db/params.php';
               include 'util/db/database.php';
               include 'util/msg_handlers.php';
 
               function openTable() {
+								# Table headers
+								$table  = "<table>";
+								$table .= "<thead>";
+								$table .= "<tr>";
+								$table .= "<th>ID</th>";
+								$table .= "<th>Login</th>";
+								$table .= "<th>New Password</th>";
+								$table .= "<th>Action</th>";
+								$table .= "</tr>";
+								$table .= "</thead>";
 
+								echo $table;
               }
 
               function closeTable() {
+								$table  = "</tbody>";
+								$table .= "</table>";
 
+								echo $table;
               }
 
               /**
                * Creates row with a single user info
                */
               function userRow ($id, $name, $login) {
-                $user  = "<tr>"
-                $user .= "<div id='user_$id'>";
-
+                $user  = "<tr>";
+                $user .= "<div class='row'>";
+								$user .= "<div id='user_" . $id . "_id'>$id</div>";
+								$user .= "<div id='user_" . $id . "_name'>$name</div>";
+								$user .= "<div id='user_" . $id . "_login'>$login</div>";
+								$user .= "<div id='user_" . $id . "_newpass'></div>";
+								$user .= "<div id='user_" . $id . "_btns'></div>";
                 $user .= "</div>";
                 $user .= "</tr>";
 
@@ -106,12 +123,15 @@
 
                   if ($results != NULL) {
                     openTable();
+										$id = 1;
                     while ($row = $results->fetch_assoc()) {
-                      $id    = $row['id'];
+                      // $id    = $row['rownum'];
                       $name  = $row['acc_name'];
                       $login = $row['acc_login'];
 
                       echo userRow($id, $name, $login);
+
+											$id++;
                     }
                     closeTable();
                   } else {
