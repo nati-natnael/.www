@@ -139,7 +139,7 @@ th {
 	vertical-align: top;
 }
 
-#acc_setting {
+#admin {
 	/*float: right;*/
 	color: white;
 	padding: 10px 30px;
@@ -173,6 +173,6 @@ th {
 	background: #298de2;
 }
 
-#acc_setting:hover {
+#admin:hover {
 	background: #298de2;
 }

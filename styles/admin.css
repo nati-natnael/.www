@@ -29,6 +29,17 @@
 #content_wrapper {
   background: lightgray;
   margin-top: 1em;
+  text-align: left;
+}
+
+#user_lst {
+  background: red;
+  padding: 1em;
+}
+
+#add_new_user {
+  background: blue;
+  padding: 1em;
 }
 
 #chng_name {
