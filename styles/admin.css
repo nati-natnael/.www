@@ -127,34 +127,8 @@
   padding: 1em;
 }
 
-#chng_name {
-  min-width: 20em;
-  padding: 1em;
-  margin: 0.5em;
-  border-bottom: 1px solid white;
+#s_id {
+  margin-top: 1em;
+  text-align: center;
 }
 
-#chng_login {
-  min-width: 20em;
-  padding: 1em;
-  margin: 0.5em;
-  border-bottom: 1px solid white;
-}
-
-#chng_pass {
-  min-width: 20em;
-  padding: 1em;
-  margin: 0.5em;
-}
-
-#chng_name form {
-  display: none;
-}
-
-#chng_login form {
-  display: none;
-}
-
-#chng_pass form {
-  display: none;
-}
