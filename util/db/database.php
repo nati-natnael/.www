@@ -110,8 +110,11 @@
 			return $this->conn->query($query);
 		}
 
-		function delete ($acc_name, $acc_login, $acc_pass) {
-			echo "not developed yet";
+		function delete ($acc_login) {
+			$query  = "DELETE FROM tbl_accounts ";
+			$query .= "WHERE acc_login  = '$acc_login';";
+
+			return $this->conn->query($query);
 		}
 	}
 ?>

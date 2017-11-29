@@ -51,15 +51,39 @@
       <!-- content -->
       <div id="content_wrapper">
 				<?php
+					include 'util/db/params.php';
+					include 'util/db/database.php';
+					include 'util/msg_handlers.php';
+
 					if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 						$btnType = $_POST['button'];
+
+						global $db_servername;
+						global $db_port;
+						global $db_name;
+						global $db_username;
+						global $db_password;
+
+						$database = new DataBase();
+						$status = $database->connect($db_servername,
+																				 $db_port,
+																				 $db_name,
+																				 $db_username,
+																				 $db_password);
 
 						if ($btnType === 'Update') {
 
 						}
 
 						if ($btnType === 'Delete') {
+							$login = $_POST['login'];
+							$status = $database->delete($login);
 
+							if ($status) {
+								echo "Account Deleted";
+							} else {
+								echo "Account delete failed. yeah";
+							}
 						}
 
 						if ($btnType === 'Cancel') {
@@ -74,10 +98,6 @@
               // error_reporting(E_ALL);
               // ini_set('display_errors', 1);
               // ini_set('display_startup_errors', 1);
-
-              include 'util/db/params.php';
-              include 'util/db/database.php';
-              include 'util/msg_handlers.php';
 
               function openTable() {
 								# Table headers
