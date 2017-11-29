@@ -32,8 +32,8 @@
 
           echo $welcomeMsg;
         } else {
-          // header('Location: login.php', true, 301);
-          // die();
+          header('Location: login.php', true, 301);
+          die();
         }
       ?>
     </div>
@@ -50,6 +50,24 @@
 
       <!-- content -->
       <div id="content_wrapper">
+				<?php
+					if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+						$btnType = $_POST['button'];
+
+						if ($btnType === 'Update') {
+
+						}
+
+						if ($btnType === 'Delete') {
+
+						}
+
+						if ($btnType === 'Cancel') {
+							// Do nothing here
+							// existing data will be loaded
+						}
+					}
+				?>
         <div id="user_lst">
           <div id="user_lst_view">
             <?php
@@ -88,11 +106,14 @@
                 $user  = "<form id='user_$id' class='tr' method='post' action='admin.php'>";
 								$user .= "<div class='td user_id'>$id</div>";
 
-								$user .= "<div class='td user_name'>";
-								$user .= "<input id='name_in_$id' type='text' value='$name' readonly>";
+								$user .= "<div id='name_in_$id' class='td user_name'>";
+								$user .= $name;
 								$user .= "</div>";
 								$user .= "<div class='td user_login'>";
-								$user .= "<input id='login_in_$id' type='text' value='$login' readonly>";
+								$user .= "<input id='login_in_$id' ";
+								$user .= 				"type='text' ";
+								$user .= 				"name='login' ";
+								$user .= 				"value='$login' readonly>";
 								$user .= "</div>";
 
 								$user .= "<div class='td user_newpass'>";
@@ -112,7 +133,8 @@
 
 								$user .= "<div class='delete_btn'>";
 								$user .= "<input id='delete_$id' ";
-								$user .= 			 	"name='$id' type='submit' ";
+								$user .= 			 	"name='button' ";
+								$user .= 			 	"type='submit' ";
 								$user .= 				"value='Delete' ";
 								$user .= 				"onclick='cancel(event)'>";
 								$user .= "</div>";

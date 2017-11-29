@@ -44,7 +44,7 @@
 					<a href="calendar.php"><div id="nav_cal_id">MyCalendar</div></a>
 					<a href="#"><div id="nav_form_id">Form Input</div></a>
 					<div id="right_menu">
-	    			<a href="admin"><div id="admin">Admin</div></a>
+	    			<a href="admin.php"><div id="admin">Admin</div></a>
 	    			<a href="logout.php"><div id="logout">Logout</div></a>
 	    		</div>
 				</div>
