@@ -125,10 +125,10 @@
 
 #add_new_user {
   padding: 1em;
+  display: inline-block;
 }
 
 #s_id {
   margin-top: 1em;
   text-align: center;
 }
-
