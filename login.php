@@ -81,7 +81,8 @@
 
                     # if error at any point
                     if ($err) {
-                        $errDiv  = "<div id='form_err'>";
+                        $errDiv  = "<div id='form_err_wrapper'>";
+                        $errDiv .= "<div id='form_err'>";
                         $errDiv .= "<div id='form_err_header'>";
                         $errDiv .= "<span style='font-size: 1.5em;'>Error</span>";
                         $errDiv .= "<input id='form_err_input'
@@ -90,6 +91,7 @@
                                            onclick='remove_error()'>";
                         $errDiv .= "</div>";
                         $errDiv .= $errMsgs;
+                        $errDiv .= "</div>";
                         $errDiv .= "</div>";
 
                         echo $errDiv;

@@ -38,11 +38,16 @@
     /*margin-top: 10em;*/
 }
 
+#form_err_wrapper {
+
+}
+
 #form_err {
     background: lightgray;
     padding: 0.5em;
     margin-bottom: 1em;
     font-family: Courier;
+    display: inline-block;
     text-align: left;
 }
 
