@@ -117,12 +117,12 @@
                         </div>
                         <div class="input_ele">
                             <input id="password_in" type="password" name="password">
-                            <a id="forgot" href="pass_recover.php">forgot password</a>
+                            <!-- <a id="forgot" href="pass_recover.php">forgot password</a> -->
                         </div>
                     </div>
                     <div id="s_id">
                         <input type="submit" name="submit" value="Login">
-                        <a href="create_acc.php">Create account</a>
+                        <!-- <a href="create_acc.php">Create account</a> -->
                     </div>
                 </div>
             </form>

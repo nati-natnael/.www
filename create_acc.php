@@ -2,11 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-		<Title>Create New User</Title>
-		<link rel="stylesheet" type="text/css" href="styles/common.css">
-		<link rel="stylesheet" type="text/css" href="styles/login.css">
+        <Title>Create New User</Title>
+        <link rel="stylesheet" type="text/css" href="styles/common.css">
+        <link rel="stylesheet" type="text/css" href="styles/login.css">
         <script type="text/javascript" src="scripts/login.js"></script>
-	</head>
+        <?php
+          header('Location: login.php', true, 301);
+          die();
+        ?>
+    </head>
     <body>
         <div id="main_content">
             <h2>Create Account</h2>
