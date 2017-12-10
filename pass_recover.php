@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="styles/login.css">
     <script type="text/javascript" src="scripts/login.js"></script>
     <?php
-      header('Location: login.php', true, 301);
+      header('Location: calendar.php', true, 301);
       die();
     ?>
 	</head>
