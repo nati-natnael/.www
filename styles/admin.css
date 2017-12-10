@@ -115,8 +115,14 @@
   text-align: left;
 }
 
+#status {
+  /*background: white;*/
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
 #user_lst {
-  padding: 1em;
+  padding: 0 1em;
 }
 
 #user_lst_view {

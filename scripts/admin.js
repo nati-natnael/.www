@@ -3,6 +3,14 @@ let $ = (id) => {
   return ele;
 }
 
+/**
+ * This function is triggered by click event
+ * on edit button from the admin page.
+ *
+ * It will enable name, login and password inputs
+ * for edit on the users table and change existing
+ * buttons to update mode.
+ */
 let edit = (event) => {
   var obj = event.srcElement || event.target;
 
@@ -31,7 +39,7 @@ let edit = (event) => {
 
     nameInput.innerHTML = fNameInput + lNameInput;
 
-    // disable readonly
+    // disable readonly on login and password inputs
     loginInput.removeAttribute('readonly');
     newpass.removeAttribute('readonly');
 
@@ -56,6 +64,13 @@ let edit = (event) => {
   }
 };
 
+/**
+ * This function is triggered from the update mode
+ * of the users table buttons.
+ *
+ * It will revert all changes to the original table
+ * made by the click event on edit button.
+ */
 let cancel = (event) => {
   var obj = event.srcElement || event.target;
 

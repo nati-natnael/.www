@@ -10,96 +10,71 @@
     <body>
         <div id="main_content">
             <h2>Login Page</h2>
-            <?php
-                error_reporting(E_ALL);
-                ini_set('display_errors', 1);
-                ini_set('display_startup_errors', 1);
+            <div id="status">
+              <?php
+                  error_reporting(E_ALL);
+                  ini_set('display_errors', 1);
+                  ini_set('display_startup_errors', 1);
 
-                include 'util/db/params.php';
-                include 'util/db/database.php';
-                include 'util/string_utils.php';
-                include 'util/msg_handlers.php';
+                  include 'util/db/db_credentials.php';
+                  include 'util/db/database.php';
+                  include 'util/string_utils.php';
+                  include 'util/msg_handlers.php';
 
-                function handle_login() {
-                    $err = FALSE;
-                    $errMsgs = "";
+                  function handle_login() {
+                      $err = FALSE;
+                      $errMsgs = "";
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                        $userName = $_POST['username'];
-                        $password = $_POST['password'];
+                      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                          $userName = $_POST['username'];
+                          $password = $_POST['password'];
 
-                        if (!validate($userName)) {
-                            $errMsgs .= errMsg("User name should alpha-numeric");
-                            $err = TRUE;
-                        }
+                          if (!validate($userName)) {
+                              echo errMsg("User name should alpha-numeric");
+                              $err = TRUE;
+                          }
 
-                        if (!passwordValidate($password)) {
-                            // display password instruction
-                            $passInstruction  = "Password guides:";
-                            $passInstruction .= "<ul>";
-                            $passInstruction .= "<li>password cannot be empty</li>";
-                            $passInstruction .= "<li>password cannot be less than 4 char long</li>";
-                            $passInstruction .= "</ul>";
+                          if (!passwordValidate($password)) {
+                              echo errMsg("Incorrect password");
+                              $err = TRUE;
+                          }
 
-                            $errMsgs .= errMsg($passInstruction);
-                            $err = TRUE;
-                        }
+                          if (!$err) {
+                              global $db_servername;
+                              global $db_port;
+                              global $db_name;
+                              global $db_username;
+                              global $db_password;
 
-                        if (!$err) {
-                            global $db_servername;
-                            global $db_port;
-                            global $db_name;
-                            global $db_username;
-                            global $db_password;
+                              $database = new DataBase();
+                              $status = $database->connect($db_servername,
+                                                           $db_port,
+                                                           $db_name,
+                                                           $db_username,
+                                                           $db_password);
 
-                            $database = new DataBase();
-                            $status = $database->connect($db_servername,
-                                                         $db_port,
-                                                         $db_name,
-                                                         $db_username,
-                                                         $db_password);
+                              if ($status) {
+                                  $nameOfUser = $database->login($userName, $password);
+                                  if ($nameOfUser != NULL) {
+                                      // store name of current user
+                                      session_start();
+                                      $_SESSION['username'] = $nameOfUser;
+                                      // redirect to calendar page
+                                      header('Location: calendar.php', true, 301);
+                                      die();
+                                  } else {
+                                      echo errMsg("The username or password is incorrect");
+                                  }
+                              } else {
+                                  // echo errMsg("Mysql connection failed");
+                              }
+                          }
+                      }
+                  }
 
-                            if ($status) {
-                                $nameOfUser = $database->login($userName, $password);
-                                if ($nameOfUser != NULL) {
-                                    // store name of current user
-                                    session_start();
-                                    $_SESSION['username'] = $nameOfUser;
-                                    // redirect to calendar page
-                                    header('Location: calendar.php', true, 301);
-                                    die();
-                                } else {
-                                    $errMsgs .= errMsg("The username or password is incorrect");
-                                    $err = TRUE;
-                                }
-                            } else {
-                                $errMsgs .= errMsg("Mysql connection failed");
-                                $err = TRUE;
-                            }
-                        }
-                    }
-
-                    # if error at any point
-                    if ($err) {
-                        $errDiv  = "<div id='form_err_wrapper'>";
-                        $errDiv .= "<div id='form_err'>";
-                        $errDiv .= "<div id='form_err_header'>";
-                        $errDiv .= "<span style='font-size: 1.5em;'>Error</span>";
-                        $errDiv .= "<input id='form_err_input'
-                                           type='button'
-                                           value='X'
-                                           onclick='remove_error()'>";
-                        $errDiv .= "</div>";
-                        $errDiv .= $errMsgs;
-                        $errDiv .= "</div>";
-                        $errDiv .= "</div>";
-
-                        echo $errDiv;
-                    }
-                }
-
-                handle_login();
-            ?>
+                  handle_login();
+              ?>
+            </div>
 
             <form method="post" action="">
                 <div id="login_elements">

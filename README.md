@@ -6,8 +6,13 @@ x500: seifu003
 Detail
 ------
 
-- Only users can add, create login for users, new users
-- Users with valid login are also Admin status
-
+http://www-users.cselabs.umn.edu/~seifu003/login.php
 login: admin
 password: admin
+
+
+File structure detail
+---------------------
+
+util [utilities used by views]
+  

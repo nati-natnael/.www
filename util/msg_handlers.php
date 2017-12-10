@@ -5,10 +5,13 @@
     * :param $errMsg: description of error
     */
     function errMsg($errMsg) {
-       $msg  = "<div style='color: red; margin-top: 0.5em;'>";
-      //  $msg .= "<img src='imgs/err_img.png'
-      //                     alt='Check Mark Image'
-      //                     style='width: 1.1em; height: 1.1em;'> ";
+       $msg  = "<div style='padding: 0.25em 0;
+                            color: red;'>";
+       $msg .= "<img src='imgs/err_img.png'
+                          alt='[Red X Mark Image]'
+                          style='width: 1.1em;
+                                 height: 1.1em;
+                                 vertical-align: top;'> ";
        $msg .= "<span style='padding: 0.1em;'>";
        $msg .= $errMsg;
        $msg .= "</span>";
@@ -18,14 +21,15 @@
     }
 
     function successMsg($success) {
-      $msg  = "<p style='color: green;'>";
+      $msg  = "<div style='padding: 0.25em 0;
+                           color: green;'>";
       $msg .= "<img src='imgs/check_mark.png'
-                    alt='Check Mark Image'
+                    alt='[Green check Mark Image]'
                     style='width: 1.1em; height: 1.1em;'> ";
       $msg .= "<span style='vertical-align: top'>";
       $msg .= $success;
       $msg .= "</span>";
-      $msg .= "</p>";
+      $msg .= "</div>";
 
       return $msg;
     }

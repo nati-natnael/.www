@@ -1,1 +1,1 @@
-{"monday":[],"tuesday":[],"wednesday":[],"thursday":[],"friday":[{"event_name":"Natnael","start_time":"00:00","end_time":"00:00","location":"Mecanical building UMN","img_url":""}]}
+{"monday":[{"event_name":"meti","start_time":"01:01","end_time":"01:01","location":"Mechanical Building UMN","img_url":""}],"tuesday":[],"wednesday":[],"thursday":[],"friday":[]}

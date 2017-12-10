@@ -19,7 +19,7 @@
             ini_set('display_errors', 1);
             ini_set('display_startup_errors', 1);
 
-              include 'util/db/params.php';
+              include 'util/db/db_credentials.php';
               include 'util/db/database.php';
               include 'util/string_utils.php';
               include 'util/msg_handlers.php';

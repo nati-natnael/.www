@@ -38,6 +38,10 @@
     /*margin-top: 10em;*/
 }
 
+#status {
+  text-align: left;
+}
+
 #form_err_wrapper {
 
 }
