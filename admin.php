@@ -111,13 +111,13 @@
  												echo successMsg("Account updated successfully");
  											} else {
  												echo errMsg("Account update failed");
- 											}						 
+ 											}
 										}
 
 										if (!empty($password)) {
 											if (!passwordValidate($password)) {
 												$valid = FALSE;
-												echo errMsg("Invalid password: ' ".$password." '");
+												echo errMsg("Invalid password");
 											}
 
 											if ($valid) {
@@ -176,7 +176,7 @@
 
 									if (!passwordValidate($password)) {
 										$valid = FALSE;
-										echo errMsg("Invalid password: ' ".$password." '");
+										echo errMsg("Invalid password");
 									}
 
 									if ($valid) {
